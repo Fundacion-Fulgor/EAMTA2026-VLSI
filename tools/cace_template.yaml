@@ -1,0 +1,111 @@
+# CACE Configuration Template for IHP SG13G2
+# This is a template for creating CACE characterization files
+# Copy and modify for each block
+
+name: block_name
+description: Description of the block
+PDK: sg13g2
+
+# Path to schematic/netlist
+paths:
+    root: ../design/schematics
+    schematic: block_name.sch
+    netlist: block_name.spice
+
+# Pin definitions
+pins:
+    - name: VDD
+      type: power
+      voltage: 1.2
+    - name: VSS
+      type: ground
+      voltage: 0.0
+    - name: IN
+      type: input
+      timing: true
+    - name: OUT
+      type: output
+      timing: true
+
+# Parameters to characterize
+parameters:
+    # Timing parameters
+    - name: tpd_rising
+      display: "Propagation Delay (Rising)"
+      description: "Propagation delay from input to output (rising edge)"
+      unit: ns
+      spec:
+        typical: 
+          min: any
+          max: 10
+      simulate:
+        template: timing_template.spice
+        measurement: tpd_rise
+        corners:
+          - tt
+          - ss
+          - ff
+    
+    - name: tpd_falling
+      display: "Propagation Delay (Falling)"
+      description: "Propagation delay from input to output (falling edge)"
+      unit: ns
+      spec:
+        typical:
+          min: any
+          max: 10
+      simulate:
+        template: timing_template.spice
+        measurement: tpd_fall
+        corners:
+          - tt
+          - ss
+          - ff
+    
+    # Power parameters
+    - name: power_static
+      display: "Static Power"
+      description: "Static power consumption"
+      unit: uW
+      spec:
+        typical:
+          min: any
+          max: 10
+      simulate:
+        template: power_static_template.spice
+        measurement: power
+        corners:
+          - tt
+    
+    - name: power_dynamic
+      display: "Dynamic Power"
+      description: "Dynamic power consumption at 10MHz"
+      unit: uW
+      spec:
+        typical:
+          min: any
+          max: 100
+      simulate:
+        template: power_dynamic_template.spice
+        measurement: power
+        corners:
+          - tt
+
+# Electrical conditions
+conditions:
+    - name: tt
+      display: "Typical"
+      temperature: 25
+      voltage: 1.2
+    - name: ss
+      display: "Slow-Slow"
+      temperature: 125
+      voltage: 1.14
+    - name: ff
+      display: "Fast-Fast"
+      temperature: -40
+      voltage: 1.26
+
+# Simulation templates directory
+templates:
+    path: ./templates

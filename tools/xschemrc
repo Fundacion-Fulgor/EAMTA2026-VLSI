@@ -1,0 +1,90 @@
+#### xschem configuration file for IHP SG13G2 PDK
+
+#### Values may be overridden by placing commands in ~/.xschem/xschemrc or ~/xschemrc
+
+#### Default values for various options
+set cadlayers_file $env(PDK_ROOT)/libs.tech/xschem/sg13g2.conf
+set dark_colorscheme 1
+set light_colors 1
+
+#### Set PDK paths
+if {[info exists env(PDK_ROOT)]} {
+    set XSCHEM_LIBRARY_PATH {}
+    
+    # IHP SG13G2 device library
+    lappend XSCHEM_LIBRARY_PATH $env(PDK_ROOT)/libs.tech/xschem
+    lappend XSCHEM_LIBRARY_PATH $env(PDK_ROOT)/libs.ref/sg13g2_pr/xschem
+    
+    # Project libraries
+    if {[info exists env(PROJECT_ROOT)]} {
+        lappend XSCHEM_LIBRARY_PATH $env(PROJECT_ROOT)/design/schematics
+        lappend XSCHEM_LIBRARY_PATH $env(PROJECT_ROOT)/design/blocks
+    }
+}
+
+#### Spice netlist options
+set netlist_dir [pwd]
+set bus_replacement_char {[}
+set bus_replacement_char_end {]}
+
+#### Ngspice options
+set ngspice [list ngspice]
+set ngspice_opt [list -b]
+
+#### PDK model files
+if {[info exists env(PDK_ROOT)]} {
+    set model_files "$env(PDK_ROOT)/libs.ref/sg13g2_pr/spice/sg13_lv_nmos.spice
+$env(PDK_ROOT)/libs.ref/sg13g2_pr/spice/sg13_lv_pmos.spice
+$env(PDK_ROOT)/libs.ref/sg13g2_pr/spice/sg13_lv_res.spice
+$env(PDK_ROOT)/libs.ref/sg13g2_pr/spice/sg13_lv_cap.spice"
+}
+
+#### Waveform viewer
+set waveform_viewer gaw
+# Alternative: set waveform_viewer ngplot
+
+#### Editor
+set editor {gvim -f}
+
+#### Terminal
+set terminal {xterm -geometry 100x40}
+
+#### GUI options
+set change_lw 1
+set color_ps 0
+set textsize 1.0
+set tabbed_netlist 1
+set show_pin_net_names 1
+
+#### Grid and snap
+set grid 20
+set snap_grid 10
+
+#### Symbol paths
+set symbols {}
+if {[info exists env(PDK_ROOT)]} {
+    lappend symbols $env(PDK_ROOT)/libs.ref/sg13g2_pr/xschem/symbols
+    lappend symbols $env(PDK_ROOT)/libs.tech/xschem/symbols
+}
+
+#### Additional preferences
+set autosave_interval 120
+set netlist_type spice
+set spiceprefix 1
+
+#### Enable hierarchy
+set enable_stretch 1
+set sym_txt 1
+
+#### Project-specific settings
+if {[info exists env(PROJECT_ROOT)]} {
+    # Set default save directory to project schematics
+    cd $env(PROJECT_ROOT)/design/schematics
+}
+
+puts "xschem configuration loaded for IHP SG13G2 PDK"
+if {[info exists env(PDK_ROOT)]} {
+    puts "PDK_ROOT: $env(PDK_ROOT)"
+} else {
+    puts "WARNING: PDK_ROOT not set!"
+}

@@ -1,0 +1,61 @@
+# Simulation outputs
+*.raw
+*.log
+*.out
+*.err
+*.spice~
+
+# xschem backup files
+*~
+*.bak
+\#*\#
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# CACE outputs
+*.xml
+*.html
+*_results/
+
+# KLayout files
+*.lyrdb
+*.lvsdb
+*.l2n
+*.cir~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporary files
+/tmp/
+*.tmp
+*.temp
+
+# Large binary files
+*.gds~
+*.oas~
+
+# Build artifacts
+*.o
+*.a
+*.dylib
+*.dll
+*.exe

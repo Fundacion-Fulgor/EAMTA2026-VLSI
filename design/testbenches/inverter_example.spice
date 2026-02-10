@@ -1,0 +1,47 @@
+* Simple Inverter Example for IHP SG13G2
+* This demonstrates basic PDK usage
+
+.title Simple Inverter
+
+* Include PDK models
+.lib '$PDK_ROOT/libs.ref/sg13g2_pr/spice/sg13_lv_models.lib' typical
+
+* Subcircuit definition
+.subckt inverter in out vdd vss
+    * PMOS - pull-up
+    Mp out in vdd vdd sg13_lv_pmos W=2u L=0.13u ng=1
+    
+    * NMOS - pull-down
+    Mn out in vss vss sg13_lv_nmos W=1u L=0.13u ng=1
+.ends
+
+* Testbench
+Vdd vdd 0 DC 1.2V
+Vss vss 0 DC 0V
+
+* Input stimulus
+Vin in 0 PULSE(0 1.2 0 100p 100p 9.9n 20n)
+
+* Device under test
+X1 in out vdd vss inverter
+
+* Load
+Cload out 0 100f
+
+* Simulation
+.control
+    tran 10p 50n
+    plot v(in) v(out)
+    
+    * Measure delays
+    meas tran tphl trig v(in) val=0.6 rise=1 targ v(out) val=0.6 fall=1
+    meas tran tplh trig v(in) val=0.6 fall=1 targ v(out) val=0.6 rise=1
+    
+    * Average delay
+    let tpd = (tphl + tplh) / 2
+    print tpd
+    
+    quit
+.endc
+
+.end
