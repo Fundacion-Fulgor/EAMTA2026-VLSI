@@ -267,11 +267,11 @@ Before submitting your PR, ensure:
 **Solution**: Verify all connections in layout match schematic, check pin names
 
 ### Issue: Git conflicts
-**Solution**: Pull latest changes, resolve conflicts manually, ask for help if needed
+**Solution**: This happens if you did a git pull after changing one file in the repo, but someone has already pushed another change before you. Therefore git doesn't know where to place the new change authored by you on the commit history. Use `git config --global pull.rebase false` followed by pull-commit-push to create a 'merge commit' that implements changes made by you and by the other person at the same time. Also, you can use `git config --global pull.rebase true` in case you haven't modified the same files as the other person (will pull the new changes and apply yours on top of those, as if you had done a git pull beforehand).
 
 ## References
 
-- [xschem Tutorial](https://xschem.sourceforge.io/stefan/xschem_man/tutorial_xschem_step1.html)
+- [What is xschem?](https://xschem.sourceforge.io/stefan/xschem_man/what_is_xschem.html)
 - [ngspice Examples](http://ngspice.sourceforge.net/docs.html)
 - [KLayout User Manual](https://www.klayout.de/doc-qt5/index.html)
-- [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics)
+- [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
