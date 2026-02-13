@@ -25,14 +25,12 @@ curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo
 ### 2. Set Up the IIC-OSIC-Tools Container
 
 ```bash
-# Pull the container image
-podman pull ghcr.io/hpretl/iic-osic-tools:latest
 
 # Create a distrobox with the container
-distrobox create --image ghcr.io/hpretl/iic-osic-tools:latest --name vlsi-tools
+distrobox create --image hpretl/iic-osic-tools:latest --name iic-osic-tools
 
 # Enter the distrobox
-distrobox enter vlsi-tools
+distrobox enter iic-osic-tools
 ```
 
 ### 3. Clone the Repository
@@ -41,24 +39,6 @@ distrobox enter vlsi-tools
 # Inside the container or on your host system
 git clone https://github.com/matebuteler/EAMTA2026-VLSI.git
 cd EAMTA2026-VLSI
-```
-
-### 4. Verify Tools
-
-Inside the distrobox, verify that all tools are available:
-
-```bash
-# Check xschem
-xschem --version
-
-# Check ngspice
-ngspice --version
-
-# Check KLayout
-klayout -v
-
-# Check CACE
-cace --version
 ```
 
 ## Working with the PDK
@@ -70,7 +50,7 @@ echo $PDK_ROOT
 ls $PDK_ROOT
 ```
 
-If the PDK is not available, refer to the container documentation for setting it up.
+If the PDK is not available, try running 'sak-pdk ihp-sh13g2'
 
 ## Directory Structure
 
@@ -116,7 +96,7 @@ If the PDK is not found:
 If tools are not working:
 - Verify you're in the correct container: `distrobox list`
 - Check tool availability: `which xschem ngspice klayout`
-- Update the container if needed: `podman pull ghcr.io/hpretl/iic-osic-tools:latest`
+- Update the container if needed: `podman pull hpretl/iic-osic-tools:latest`
 
 ## Additional Resources
 
