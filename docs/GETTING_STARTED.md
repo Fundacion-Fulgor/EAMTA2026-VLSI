@@ -44,7 +44,7 @@ distrobox enter iic-osic-tools
     ```
 3. Add the public key to your GitHub account:
     - Go to GitHub Settings → SSH and GPG keys → New SSH key
-    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these by running `cat ~/.ssh/id_ed25519.pub` on your terminal.
+    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these in the correct format by running `ssh-keygen -i -f ~/.ssh/id_ed25519.pub` on your terminal.
 
 #### Start the SSH Agent
 
@@ -114,7 +114,9 @@ If the PDK is not found:
 
 If tools are not working:
 - Verify you're in the correct container: `distrobox list`
+  - This should return `distrobox: command not found`. If it doesn't, you're likely still outside the container. Run `distrobox enter iic-osic-tools`.
 - Check tool availability: `which xschem ngspice klayout`
+  - This should return a list of paths. If it doesn't, you're likely still outside the container. Run `distrobox enter iic-osic-tools`.
 - Update the container if needed: `podman pull hpretl/iic-osic-tools:latest`
 
 ## Additional Resources
