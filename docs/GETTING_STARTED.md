@@ -28,8 +28,14 @@ curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo
 ```bash
 
 # Create a distrobox with the container
-distrobox create --image docker.io/hpretl/iic-osic-tools:latest --name iic-osic-tools
-
+distrobox create -n iic-osic-tools -i docker.io/hpretl/iic-osic-tools:latest \
+--additional-flags "--env PATH=/headless/.local/bin:/foss/tools/bin:/foss/tools/sak:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/foss/tools/kactus2:/foss/tools/klayout:/foss/tools/osic-multitool" \
+--additional-flags "--env PDK_ROOT=/foss/pdks" \
+--additional-flags "--env PDK=ihp-sg13g2" \
+--additional-flags "--env PDKPATH=/foss/pdks/ihp-sg13g2" \
+--additional-flags "--env STD_CELL_LIBRARY=sg13g2_stdcell" \
+--additional-flags "--env SPICE_USERINIT_DIR=/foss/pdks/ihp-sg13g2/libs.tech/ngspice" \
+--additional-flags "--env KLAYOUT_PATH=/headless/.klayout:/foss/pdks/ihp-sg13g2/libs.tech/klayout:/foss/pdks/ihp-sg13g2/libs.tech/klayout/tech"
 # Enter the distrobox
 distrobox enter iic-osic-tools
 ```
