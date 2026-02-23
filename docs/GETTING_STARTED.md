@@ -28,8 +28,14 @@ curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo
 ```bash
 
 # Create a distrobox with the container
-distrobox create --image docker.io/hpretl/iic-osic-tools:latest --name iic-osic-tools
-
+distrobox create -n iic-osic-tools -i docker.io/hpretl/iic-osic-tools:latest \
+--additional-flags "--env PATH=/headless/.local/bin:/foss/tools/bin:/foss/tools/sak:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/foss/tools/kactus2:/foss/tools/klayout:/foss/tools/osic-multitool" \
+--additional-flags "--env PDK_ROOT=/foss/pdks" \
+--additional-flags "--env PDK=ihp-sg13g2" \
+--additional-flags "--env PDKPATH=/foss/pdks/ihp-sg13g2" \
+--additional-flags "--env STD_CELL_LIBRARY=sg13g2_stdcell" \
+--additional-flags "--env SPICE_USERINIT_DIR=/foss/pdks/ihp-sg13g2/libs.tech/ngspice" \
+--additional-flags "--env KLAYOUT_PATH=/headless/.klayout:/foss/pdks/ihp-sg13g2/libs.tech/klayout:/foss/pdks/ihp-sg13g2/libs.tech/klayout/tech"
 # Enter the distrobox
 distrobox enter iic-osic-tools
 ```
@@ -44,7 +50,7 @@ distrobox enter iic-osic-tools
     ```
 3. Add the public key to your GitHub account:
     - Go to GitHub Settings → SSH and GPG keys → New SSH key
-    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these by running `ssh-keygen -i -f ~/.ssh/id_ed25519.pub` on your terminal.
+    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these in the correct format by running `ssh-keygen -i -f ~/.ssh/id_ed25519.pub` on your terminal.
 
 #### Start the SSH Agent
 
@@ -114,7 +120,9 @@ If the PDK is not found:
 
 If tools are not working:
 - Verify you're in the correct container: `distrobox list`
+  - This should return `distrobox: command not found`. If it doesn't, you're likely still outside the container. Run `distrobox enter iic-osic-tools`.
 - Check tool availability: `which xschem ngspice klayout`
+  - This should return a list of paths. If it doesn't, you're likely still outside the container. Run `distrobox enter iic-osic-tools`.
 - Update the container if needed: `podman pull hpretl/iic-osic-tools:latest`
 
 ## Additional Resources
