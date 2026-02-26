@@ -41,12 +41,13 @@ install_packages() {
     fi
     curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
 }
+SETUP_FLAG=~/.osic_setup_done
 
-install_packages
+if [ ! -f "$SETUP_FLAG" ]; then
+    install_packages
+    distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest 
+done
 
-
-# Create a distrobox with the container
-distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest 
 
 # Enter the distrobox and automatically run first-time setup
 # We write the payload to a local shell script in the home directory
