@@ -21,7 +21,7 @@ On the newly-created Ubuntu terminal, run `git clone https://github.com/Fundacio
 
 ### 2. Run the setup script and set SSH keys
 
-Once inside the EAMTA2026-VLSI directory, run `./setup.sh`. When the script finishes pulling the 20GB design tools, it will ask for your email to generate an SSH key. Copy that key to the [https://github.com/settings/ssh/new](Add new SSH Key) page's "key" field and give it an arbitrary title. Leave "Key type" as default (Authentication Key).
+Once inside the EAMTA2026-VLSI directory, run `./setup.sh`. When the script finishes pulling the 20GB design tools, it will ask for your email to generate an SSH key. Copy that key to the [Add new SSH Key](https://github.com/settings/ssh/new) page's "key" field and give it an arbitrary title. Leave "Key type" as default (Authentication Key).
 
 ## Working with the PDK
 
