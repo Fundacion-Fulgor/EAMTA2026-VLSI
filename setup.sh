@@ -101,10 +101,11 @@ if [ ! -f "$SETUP_FLAG" ]; then
     # Make sure we don't clone if we're already inside the repo or it exists
     if [ ! -d ".git" ]; then
         if [ ! -d "EAMTA2026-VLSI" ]; then
-            git clone git@github.com:Fundacion-Fulgor/EAMTA2026-VLSI.git
+            git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git
         fi
         if [ -d "EAMTA2026-VLSI" ]; then
             cd EAMTA2026-VLSI
+            git remote set-url origin git@github.com:Fundacion-Fulgor/EAMTA2026-VLSI.git
             # Quietly fetch updates in the background on startup
             git fetch &> /dev/null &
         fi
