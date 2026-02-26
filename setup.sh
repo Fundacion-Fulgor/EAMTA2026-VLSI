@@ -39,6 +39,7 @@ install_packages() {
     else
         echo -e "${GREEN}podman is already installed.${NC}"
     fi
+    curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
 }
 
 install_packages
@@ -48,7 +49,9 @@ install_packages
 distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest 
 
 # Enter the distrobox and automatically run first-time setup
-distrobox enter iic-osic-tools2 -- bash -c "$(cat << 'EOF'
+# We write the payload to a local shell script in the home directory
+# to avoid quoting and nested evaluation issues when distrobox parses arguments.
+cat << 'EOF' > ~/.iic_osic_setup.sh
 msg() {  echo -e "\n\e[1;32m[INFO]\e[0m $1"; }
 
 # Ensure environment variables are set for this session and future interactive sessions
@@ -122,6 +125,9 @@ else
     fi
 fi
 
+# Clean up and launch interactive shell
+rm -f ~/.iic_osic_setup.sh
 exec bash
 EOF
-)"
+
+distrobox enter iic-osic-tools2 -- bash ~/.iic_osic_setup.sh
