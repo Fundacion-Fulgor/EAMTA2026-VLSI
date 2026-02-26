@@ -97,6 +97,13 @@ if [ ! -f "$SETUP_FLAG" ]; then
     msg "Here is your SSH public key:"
     if [ -f ~/.ssh/id_ed25519.pub ]; then
         cat ~/.ssh/id_ed25519.pub
+        if command -v clip.exe &> /dev/null; then
+            cat ~/.ssh/id_ed25519.pub | clip.exe
+            msg "(The public key has been copied to your Windows clipboard!)"
+        elif command -v xclip &> /dev/null; then
+            cat ~/.ssh/id_ed25519.pub | xclip -selection clipboard
+            msg "(The public key has been copied to your clipboard!)"
+        fi
     fi
     msg "Now go to https://github.com/settings/ssh/new , paste this key and give it an arbitrary name"
     msg "Opening the browser in 5 seconds..."

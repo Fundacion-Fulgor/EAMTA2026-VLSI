@@ -12,16 +12,45 @@ This guide will help you set up the development environment for the 4-bit counte
 
 ## Environment Setup
 
-### 1. Create a GitHub account and clone this repo
+### 1. Automated Installation
 
-You can create a GitHub account if you don't have one by pressing the 'Sign Up' green button at the top right corner of [github.com](https://github.com).
+This section provides single commands to install dependencies, clone the repository, and run the setup script without requiring user interaction during the process.
 
-Then start Ubuntu WSL by running `wsl` on PowerShell.
-On the newly-created Ubuntu terminal, run `git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git`. This will create a directory named `EAMTA2026-VLSI`. Run `cd EAMTA2026-VLSI` to get inside.
+**⚠️ IMPORTANT:** The automated installation skips the interactive SSH key generation prompts. You will still need to **manually add your generated SSH key to GitHub** (see Step 2 below) to be able to push your assigned block!
 
-### 2. Run the setup script and set SSH keys
+#### Windows (PowerShell)
 
-Once inside the EAMTA2026-VLSI directory, run `./setup.sh`. When the script finishes pulling the 20GB design tools, it will ask for your email to generate an SSH key. Copy that key to the [Add new SSH Key](https://github.com/settings/ssh/new) page's "key" field and give it an arbitrary title. Leave "Key type" as default (Authentication Key).
+If you are on Windows, open **PowerShell** and run this command:
+
+```powershell
+wsl --install; wsl -- bash -c "cd ~ && git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git && cd EAMTA2026-VLSI && printf '\n\n' | ./setup.sh"
+```
+
+#### Linux (Terminal)
+
+If you are already on a Linux system, open your terminal and run:
+
+```bash
+cd ~ && git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git && cd EAMTA2026-VLSI && printf '\n\n' | ./setup.sh
+```
+
+### 2. Set Up GitHub SSH Keys (Required)
+
+Whether you used the automated or manual installation, you must add the generated SSH key to your GitHub account to push your work.
+
+1. Create a GitHub account at [github.com](https://github.com) if you don't have one.
+2. The installation script will automatically print your new SSH public key at the end of the process (and copy it to your clipboard).
+   *(If you missed it, you can print it again by running `cat ~/.ssh/id_ed25519.pub` in the terminal).*
+3. Paste the copied key into the "Key" field on the [Add new SSH Key](https://github.com/settings/ssh/new) page. Give it an arbitrary title and leave "Key type" as Authentication Key.
+
+### 3. Manual Installation (Alternative)
+
+If you prefer to run the steps manually:
+
+1. Start Ubuntu WSL by running `wsl` on PowerShell (or just open your terminal on Linux).
+2. Clone the repo: `git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git`
+3. Enter the directory: `cd EAMTA2026-VLSI`
+4. Run the setup script: `./setup.sh`. When prompted, provide your email to generate the SSH key and follow the on-screen instructions to add it to GitHub.
 
 ## Working with the PDK
 
