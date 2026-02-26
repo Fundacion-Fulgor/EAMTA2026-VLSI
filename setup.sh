@@ -93,7 +93,9 @@ if [ ! -f "$SETUP_FLAG" ]; then
         cat ~/.ssh/id_ed25519.pub
     fi
     msg "Now go to https://github.com/settings/ssh/new , paste this key and give it an arbitrary name"
-    
+    msg "Opening the browser in 5 seconds..."
+    sleep 5
+    xdg-open https://github.com/settings/ssh/new
     read -p "Press [Enter] to continue after adding the key..."
 fi
 
