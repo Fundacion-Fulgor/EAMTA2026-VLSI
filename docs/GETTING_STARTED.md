@@ -16,7 +16,7 @@ This guide will help you set up the development environment for the 4-bit counte
 
 You can create a GitHub account if you don't have one by pressing the 'Sign Up' green button at the top right corner of [github.com](https://github.com).
 
-Then start Ubuntu WSL by running `wsl --install` on PowerShell.
+Then start Ubuntu WSL by running `wsl` on PowerShell.
 On the newly-created Ubuntu terminal, run `git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git`. This will create a directory named `EAMTA2026-VLSI`. Run `cd EAMTA2026-VLSI` to get inside.
 
 ### 2. Run the setup script and set SSH keys
