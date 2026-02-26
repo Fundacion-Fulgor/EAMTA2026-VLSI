@@ -160,4 +160,4 @@ rm -f ~/.iic_osic_setup.sh
 exec bash
 EOF
 
-distrobox enter iic-osic-tools2 -- bash ~/.iic_osic_setup.sh $AUTO_ARG
+exec distrobox enter iic-osic-tools2 -- bash ~/.iic_osic_setup.sh $AUTO_ARG
