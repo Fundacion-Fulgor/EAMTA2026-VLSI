@@ -1,5 +1,10 @@
 #!/bin/bash
 msg() {  echo -e "\n\e[1;32m[INFO]\e[0m $1"; }
+err() { echo -e "\n\e[1;31m[ERROR]\e[0m $1" >&2; exit 1; }
+
+if [ -d "/foss/pdks" ]; then
+    err "You seem to be already inside the design environment! This setup script is not needed. You can safely run 'xschem &' to start the schematic editor. Exiting..."
+fi
 
 install_packages() {
     msg "Checking for podman package..."
@@ -102,7 +107,7 @@ fi
 
 eval "$(ssh-agent -s)" >/dev/null
 ssh-add ~/.ssh/id_ed25519
-msg Everything done! You can type "xschem &" to start the schematic editor.
+msg "Everything done! You can type "xschem &" to start the schematic editor."
 
 if [ ! -f "$SETUP_FLAG" ]; then
     # Make sure we don't clone if we're already inside the repo or it exists
