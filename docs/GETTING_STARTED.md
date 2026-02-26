@@ -23,7 +23,7 @@ This section provides single commands to install dependencies, clone the reposit
 If you are on Windows, open **PowerShell** and run this command:
 
 ```powershell
-wsl --install; wsl -- bash -c "cd ~ && git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git && cd EAMTA2026-VLSI && printf '\n\n' | ./setup.sh"
+wsl --install; wsl ~ -e bash -c "git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git && cd EAMTA2026-VLSI && ./setup.sh --auto"
 ```
 
 #### Linux (Terminal)
@@ -31,7 +31,7 @@ wsl --install; wsl -- bash -c "cd ~ && git clone https://github.com/Fundacion-Fu
 If you are already on a Linux system, open your terminal and run:
 
 ```bash
-cd ~ && git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git && cd EAMTA2026-VLSI && printf '\n\n' | ./setup.sh
+cd ~ && git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git && cd EAMTA2026-VLSI && ./setup.sh --auto
 ```
 
 ### 2. Set Up GitHub SSH Keys (Required)

@@ -6,6 +6,11 @@ if [ -d "/foss/pdks" ]; then
     err "You seem to be already inside the design environment! This setup script is not needed. You can safely run 'xschem &' to start the schematic editor. Exiting..."
 fi
 
+AUTO_ARG=""
+if [ "$1" == "--auto" ]; then
+    AUTO_ARG="--auto"
+fi
+
 install_packages() {
     msg "Checking for podman package..."
     # Detect package manager and set podman package
@@ -58,6 +63,11 @@ fi
 # We write the payload to a local shell script in the home directory
 # to avoid quoting and nested evaluation issues when distrobox parses arguments.
 cat << 'EOF' > ~/.iic_osic_setup.sh
+AUTO_MODE=0
+if [ "$1" == "--auto" ]; then
+    AUTO_MODE=1
+fi
+
 msg() {  echo -e "\n\e[1;32m[INFO]\e[0m $1"; }
 
 # Ensure environment variables are set for this session and future interactive sessions
@@ -89,8 +99,12 @@ SETUP_FLAG=~/.osic_setup_done
 if [ ! -f "$SETUP_FLAG" ]; then
     # Check if SSH key already exists
     if [ ! -f ~/.ssh/id_ed25519 ]; then
-        # Ask user for email
-        read -p "Enter your email for SSH key: " USER_EMAIL
+        if [ "$AUTO_MODE" = "1" ]; then
+            USER_EMAIL="${USER:-student}@${HOSTNAME:-eamta2026}"
+        else
+            # Ask user for email
+            read -p "Enter your email for SSH key: " USER_EMAIL
+        fi
         ssh-keygen -t ed25519 -C "$USER_EMAIL" -N "" -f ~/.ssh/id_ed25519
     fi
 
@@ -106,10 +120,10 @@ if [ ! -f "$SETUP_FLAG" ]; then
         fi
     fi
     msg "Now go to https://github.com/settings/ssh/new , paste this key and give it an arbitrary name"
-    msg "Opening the browser in 5 seconds..."
-    sleep 5
-    xdg-open https://github.com/settings/ssh/new
-    read -p "Press [Enter] to continue after adding the key..."
+        msg "Opening the browser in 5 seconds..."
+        sleep 5
+        xdg-open https://github.com/settings/ssh/new
+        read -p "Press [Enter] to continue after adding the key..."
 fi
 
 eval "$(ssh-agent -s)" >/dev/null
@@ -146,4 +160,4 @@ rm -f ~/.iic_osic_setup.sh
 exec bash
 EOF
 
-distrobox enter iic-osic-tools2 -- bash ~/.iic_osic_setup.sh
+distrobox enter iic-osic-tools2 -- bash ~/.iic_osic_setup.sh $AUTO_ARG
