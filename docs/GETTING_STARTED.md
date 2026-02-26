@@ -12,59 +12,16 @@ This guide will help you set up the development environment for the 4-bit counte
 
 ## Environment Setup
 
-### 1. Install Required Software
+### 1. Create a GitHub account and clone this repo
 
-```bash
-# Install podman (if not already installed)
-sudo apt update
-sudo apt install podman
+You can create a GitHub account if you don't have one by pressing the 'Sign Up' green button at the top right corner of [github.com](https://github.com).
 
-# Install distrobox
-curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
-```
+Then start Ubuntu WSL by running `wsl --install` on PowerShell.
+On the newly-created Ubuntu terminal, run `git clone https://github.com/Fundacion-Fulgor/EAMTA2026-VLSI.git`. This will create a directory named `EAMTA2026-VLSI`. Run `cd EAMTA2026-VLSI` to get inside.
 
-### 2. Set Up the IIC-OSIC-Tools Container
+### 2. Run the setup script and set SSH keys
 
-```bash
-
-# Create a distrobox with the container
-distrobox create -n iic-osic-tools -i docker.io/hpretl/iic-osic-tools:latest \
---additional-flags "--env PATH=/headless/.local/bin:/foss/tools/bin:/foss/tools/sak:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/foss/tools/kactus2:/foss/tools/klayout:/foss/tools/osic-multitool" \
---additional-flags "--env PDK_ROOT=/foss/pdks" \
---additional-flags "--env PDK=ihp-sg13g2" \
---additional-flags "--env PDKPATH=/foss/pdks/ihp-sg13g2" \
---additional-flags "--env STD_CELL_LIBRARY=sg13g2_stdcell" \
---additional-flags "--env SPICE_USERINIT_DIR=/foss/pdks/ihp-sg13g2/libs.tech/ngspice" \
---additional-flags "--env KLAYOUT_PATH=/headless/.klayout:/foss/pdks/ihp-sg13g2/libs.tech/klayout:/foss/pdks/ihp-sg13g2/libs.tech/klayout/tech"
-# Enter the distrobox
-distrobox enter iic-osic-tools
-```
-### 3. Set Up SSH and Clone the Repository
-
-#### Create a GitHub Account and SSH Key
-
-1. Create a GitHub account at [github.com](https://github.com) if you don't have one
-2. Generate an SSH keypair, by running this on your distrobox terminal:
-    ```bash
-    ssh-keygen -t ed25519 -C "your-email@example.com"
-    ```
-3. Add the public key to your GitHub account:
-    - Go to [https://github.com/settings/ssh/new](GitHub Settings → SSH and GPG keys → New SSH key)
-    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these in the correct format by running `cat ~/.ssh/id_ed25519.pub` or `ssh-keygen -i -f ~/.ssh/id_ed25519.pub` on your terminal. You should get something similar to `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIeaSC7gH5JGUQLVcDbmteMHJLCCqE0WdBjpCkR/QCQR mateojosebuteler@gmail.com`.
-
-#### Start the SSH Agent
-
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-```
-
-#### Clone the Repository
-
-```bash
-git clone git@github.com:matebuteler/EAMTA2026-VLSI.git
-cd EAMTA2026-VLSI
-```
+Once inside the EAMTA2026-VLSI directory, run `./setup.sh`. When the script finishes pulling the 20GB design tools, it will ask for your email to generate an SSH key. Copy that key to the [https://github.com/settings/ssh/new](Add new SSH Key) page's "key" field and give it an arbitrary title. Leave "Key type" as default (Authentication Key).
 
 ## Working with the PDK
 
