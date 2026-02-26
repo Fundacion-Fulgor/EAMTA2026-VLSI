@@ -49,8 +49,8 @@ distrobox enter iic-osic-tools
     ssh-keygen -t ed25519 -C "your-email@example.com"
     ```
 3. Add the public key to your GitHub account:
-    - Go to GitHub Settings → SSH and GPG keys → New SSH key
-    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these in the correct format by running `ssh-keygen -i -f ~/.ssh/id_ed25519.pub` on your terminal.
+    - Go to [https://github.com/settings/ssh/new](GitHub Settings → SSH and GPG keys → New SSH key)
+    - Paste the contents of `~/.ssh/id_ed25519.pub`. You can fetch these in the correct format by running `cat ~/.ssh/id_ed25519.pub` or `ssh-keygen -i -f ~/.ssh/id_ed25519.pub` on your terminal. You should get something similar to `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIeaSC7gH5JGUQLVcDbmteMHJLCCqE0WdBjpCkR/QCQR mateojosebuteler@gmail.com`.
 
 #### Start the SSH Agent
 
