@@ -46,7 +46,7 @@ SETUP_FLAG=~/.osic_setup_done
 if [ ! -f "$SETUP_FLAG" ]; then
     install_packages
     distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest 
-done
+fi
 
 
 # Enter the distrobox and automatically run first-time setup
