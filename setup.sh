@@ -107,7 +107,7 @@ fi
 
 eval "$(ssh-agent -s)" >/dev/null
 ssh-add ~/.ssh/id_ed25519
-msg "Everything done! You can type "xschem &" to start the schematic editor."
+msg "Everything done! You can type 'xschem &' to start the schematic editor."
 
 if [ ! -f "$SETUP_FLAG" ]; then
     # Make sure we don't clone if we're already inside the repo or it exists
