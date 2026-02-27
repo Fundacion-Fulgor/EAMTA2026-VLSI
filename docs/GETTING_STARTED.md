@@ -23,7 +23,7 @@ This section provides single commands to install dependencies, clone the reposit
 If you are on Windows, ensure you have WSL installed (run `wsl --install -n` and wait for it to finish). Then open **PowerShell** and run this single command:
 
 ```powershell
-wsl ~ -e bash -c "apt-get update && apt-get install -y curl && curl -sSL https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/develop/setup.sh -o /tmp/setup.sh && chmod +x /tmp/setup.sh && /tmp/setup.sh --auto"
+wsl ~ -e bash -c "curl -sSL https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/develop/setup.sh -o /tmp/setup.sh && chmod +x /tmp/setup.sh && /tmp/setup.sh --auto"
 ```
 
 #### Linux (Terminal)

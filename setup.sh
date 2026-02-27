@@ -94,7 +94,7 @@ SETUP_FLAG=~/.osic_setup_done
 
 if [ ! -f "$SETUP_FLAG" ]; then
     install_packages
-    distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest 
+    distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest --yes
 fi
 
 
