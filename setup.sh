@@ -16,30 +16,35 @@ install_packages() {
     # Detect package manager and set podman package
     if command -v apt-get &> /dev/null; then
         PKG_MANAGER="apt-get"
-        UPDATE_CMD="sudo apt-get update"
-        INSTALL_CMD="sudo apt-get install -y"
+        UPDATE_CMD="apt-get update"
+        INSTALL_CMD="apt-get install -y"
     elif command -v dnf &> /dev/null; then
         PKG_MANAGER="dnf"
-        UPDATE_CMD="sudo dnf update"
-        INSTALL_CMD="sudo dnf install -y"
+        UPDATE_CMD="dnf update"
+        INSTALL_CMD="dnf install -y"
     elif command -v yum &> /dev/null; then
         PKG_MANAGER="yum"
-        UPDATE_CMD="sudo yum update"
-        INSTALL_CMD="sudo yum install -y"
+        UPDATE_CMD="yum update"
+        INSTALL_CMD="yum install -y"
     elif command -v pacman &> /dev/null; then
         PKG_MANAGER="pacman"
         UPDATE_CMD="echo" # Arch will update during install
-        INSTALL_CMD="sudo pacman -Syu --noconfirm"
+        INSTALL_CMD="pacman -Syu --noconfirm"
     elif command -v zypper &> /dev/null; then
         PKG_MANAGER="zypper"
-        UPDATE_CMD="sudo zypper ref"
-        INSTALL_CMD="sudo zypper install -y"
+        UPDATE_CMD="zypper ref"
+        INSTALL_CMD="zypper install -y"
     else
         echo -e "${RED}Error: No supported package manager found. Please install podman manually.${NC}"
         exit 1
     fi
     
     echo -e "Using package manager: ${GREEN}$PKG_MANAGER${NC}"
+
+    if [ "$EUID" -ne 0 ]; then
+        UPDATE_CMD="sudo $UPDATE_CMD"
+        INSTALL_CMD="sudo $INSTALL_CMD"
+    fi
 
     # Install podman if not present
     if ! command -v podman &> /dev/null; then
@@ -49,8 +54,42 @@ install_packages() {
     else
         echo -e "${GREEN}podman is already installed.${NC}"
     fi
-    curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
+    if ! command -v distrobox &> /dev/null; then
+        echo -e "${YELLOW}Installing distrobox...${NC}"
+        curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
+    else
+        echo -e "${GREEN}distrobox is already installed.${NC}"
+    fi
 }
+
+if [ "$EUID" -eq 0 ]; then
+    msg "Running as root! Setting up the 'eamtastudent' user and system dependencies..."
+    install_packages
+
+    if ! id -u eamtastudent &>/dev/null; then
+        msg "Creating default user 'eamtastudent'..."
+        useradd -m -G sudo -s /bin/bash eamtastudent
+        echo 'eamtastudent:vlsi2026' | chpasswd
+        
+        # Make WSL login as eamtastudent by default
+        if command -v wsl.exe &>/dev/null || uname -r | grep -qi "microsoft"; then
+            echo -e "[user]\ndefault=eamtastudent" >> /etc/wsl.conf
+        fi
+    fi
+
+    SCRIPT_PATH="$(realpath "$0")"
+    
+    # If the script was downloaded to /root or /tmp, move it to eamtastudent's home
+    if [[ "$SCRIPT_PATH" == /root/* ]] || [[ "$SCRIPT_PATH" == /tmp/* ]]; then
+        cp "$SCRIPT_PATH" /home/eamtastudent/setup.sh
+        chown eamtastudent:eamtastudent /home/eamtastudent/setup.sh
+        SCRIPT_PATH="/home/eamtastudent/setup.sh"
+    fi
+    
+    msg "Switching to user 'eamtastudent' to continue setup..."
+    exec su - eamtastudent -c "\"$SCRIPT_PATH\" $AUTO_ARG"
+fi
+
 SETUP_FLAG=~/.osic_setup_done
 
 if [ ! -f "$SETUP_FLAG" ]; then
