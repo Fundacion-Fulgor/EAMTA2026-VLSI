@@ -1,0 +1,65 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1742163186
+<< nwell >>
+rect 0 486 640 1063
+<< poly >>
+rect 101 486 131 637
+rect 29 420 131 486
+rect 101 398 131 420
+rect 189 551 219 637
+rect 189 485 291 551
+rect 189 398 219 485
+<< metal1 >>
+rect 21 982 617 1037
+rect 55 925 89 982
+rect 231 925 265 982
+rect 143 609 177 649
+rect 143 576 358 609
+rect 325 460 358 576
+rect 231 426 358 460
+rect 231 386 265 426
+rect 325 320 358 426
+rect 325 286 417 320
+rect 55 55 89 110
+rect 22 0 618 55
+use grid__1  grid_0
+timestamp 1742074513
+transform 1 0 61 0 1 10
+box -61 -10 259 1053
+use inverter  inverter_0 blocks/inverter/layout
+timestamp 1742101489
+transform -1 0 640 0 1 0
+box 0 0 320 1063
+use sky130_fd_pr__nfet_01v8_VKD229  sky130_fd_pr__nfet_01v8_VKD229_0
+timestamp 1741801933
+transform 1 0 116 0 1 248
+box -73 -176 73 176
+use sky130_fd_pr__nfet_01v8_VKD229  sky130_fd_pr__nfet_01v8_VKD229_1
+timestamp 1741801933
+transform 1 0 204 0 1 248
+box -73 -176 73 176
+use sky130_fd_pr__pfet_01v8_MDJ67A__1  sky130_fd_pr__pfet_01v8_MDJ67A_2
+timestamp 1742074513
+transform 1 0 116 0 1 787
+box -109 -212 109 212
+use sky130_fd_pr__pfet_01v8_MDJ67A__1  sky130_fd_pr__pfet_01v8_MDJ67A_3
+timestamp 1742074513
+transform 1 0 204 0 1 787
+box -109 -212 109 212
+use viapoly_M1__2  viapoly_M1_0
+timestamp 1742074513
+transform 1 0 -11 0 1 222
+box 34 198 112 264
+use viapoly_M1__2  viapoly_M1_1
+timestamp 1742074513
+transform 1 0 185 0 1 287
+box 34 198 112 264
+<< labels >>
+rlabel nwell 21 982 619 1037 1 vdd
+rlabel space 505 236 539 649 1 out
+rlabel metal1 22 0 618 55 1 vss
+rlabel poly 189 398 219 637 1 b_in
+rlabel poly 101 398 131 637 1 a_in
+<< end >>
