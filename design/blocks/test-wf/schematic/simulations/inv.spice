@@ -1,0 +1,10 @@
+** sch_path: /home/mateo/GitRepos/EAMTA2026-VLSI/design/blocks/test-wf/schematic/inv.sch
+**.subckt inv vdd vss out in
+*.iopin vdd
+*.iopin vss
+*.opin out
+*.ipin in
+XM1 out in vss vss sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+**.ends
+.end
