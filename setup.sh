@@ -131,6 +131,8 @@ SETUP_FLAG=~/.osic_setup_done
 if [ ! -f "$SETUP_FLAG" ]; then
     # Generate SSH key (no passphrase)
     if [ ! -f ~/.ssh/id_ed25519 ]; then
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
         USER_EMAIL="${USER:-student}@${HOSTNAME:-eamta2026}"
         ssh-keygen -t ed25519 -C "$USER_EMAIL" -N "" -f ~/.ssh/id_ed25519
     fi
