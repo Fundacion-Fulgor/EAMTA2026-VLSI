@@ -52,9 +52,11 @@ git checkout -b group-<N>/<block-name>
 #### 3.2 Simulation (ngspice)
 
 1. Create a testbench:
+
    ```bash
-   mkdir -p verification/testbenches/<block-name>
-   cd verification/testbenches/<block-name>
+   cd design
+   mkdir -p ../verification/testbenches/tb_<block-name>.sch
+   xschem ../verification/testbenches/tb_<block-name>.sch
    ```
 
 2. Create testbench schematic in xschem:
