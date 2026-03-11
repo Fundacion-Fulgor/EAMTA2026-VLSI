@@ -1,16 +1,16 @@
-** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_inverter.sch/tb_inverter.sch
-**.subckt tb_inverter
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_andgate.sch
+**.subckt tb_andgate
 C1 net1 avss1p8 1p
 V4 avss1p8 GND DC{vdd}
 V5 avdd1p8 avss1p8 DC{vdd}
 V6 vin avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2}) DC 0 AC 0
-x1 avdd1p8 vin vout avss1p8 inverter
+x1 avdd1p8 vin GND vout avss1p8 andgate
 x2 avdd1p8 vout net1 avss1p8 inverter
 **** begin user architecture code
 
 
 * Circuit Parameters
-.param vdd = 1.2
+.param vdd = 1
 .param vss = 0.0
 .param Tclk = 10n
 .options TEMP = 27.0
@@ -22,9 +22,9 @@ x2 avdd1p8 vout net1 avss1p8 inverter
 .control
 tran 0.01u 100n
 setplot tran1
-plot v(vin) v(vout)+1.2
+plot v(vin) v(vout)+1
 reset
-dc V6 0 1.2 0.01
+dc V6 0 1 0.01
 setplot dc
 plot vin vout ylabel vout xlabel vin
 set filetype = ascii
@@ -35,6 +35,24 @@ write dcsweep.raw
 
 **** end user architecture code
 **.ends
+
+* expanding   symbol:  blocks/andgate/schematic/andgate.sym # of pins=5
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sch
+.subckt andgate vdd A B Z vss
+*.iopin A
+*.iopin vdd
+*.iopin vss
+*.iopin B
+*.iopin Z
+XM1 net1 A vdd vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+XM2 vdd B net1 vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+XM3 net1 A net2 vss sg13_lv_nmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+XM4 net2 B vss vss sg13_lv_nmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+XM5 Z net1 vdd vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+XM6 Z net1 vss vss sg13_lv_nmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
+.ends
+
 
 * expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
 ** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
