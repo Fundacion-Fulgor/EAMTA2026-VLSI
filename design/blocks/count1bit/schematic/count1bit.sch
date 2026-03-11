@@ -5,43 +5,46 @@ V {}
 S {}
 F {}
 E {}
-N -110 -120 30 -120 {lab=CE}
-N -110 -120 -110 -80 {lab=CE}
-N -270 -120 -110 -120 {lab=CE}
-N -140 -140 -140 -80 {lab=#net1}
-N -30 -140 30 -140 {lab=#net1}
-N 130 -130 250 -130 {lab=#net2}
-N 440 -130 490 -130 {lab=#net1}
-N 440 -220 440 -130 {lab=#net1}
-N 380 -130 440 -130 {lab=#net1}
-N -30 -220 440 -220 {lab=#net1}
-N -30 -220 -30 -140 {lab=#net1}
-N -140 -140 -30 -140 {lab=#net1}
-N 290 -200 290 -170 {lab=CLK}
-N 210 -200 290 -200 {lab=CLK}
-N 210 -200 210 100 {lab=CLK}
-N 290 -90 290 100 {lab=CLR}
-N -130 130 -30 130 {lab=Sout}
-N -130 80 -130 130 {lab=Sout}
-N 80 -270 80 -180 {lab=vdd}
-N 330 -270 330 -170 {lab=vdd}
-N 80 -270 330 -270 {lab=vdd}
-N 80 -280 80 -270 {lab=vdd}
-N -60 -270 -60 -20 {lab=vdd}
-N -60 -270 80 -270 {lab=vdd}
-N 80 160 80 180 {lab=vss}
-N -200 -20 -200 160 {lab=vss}
-N -200 160 80 160 {lab=vss}
-N 80 -80 80 160 {lab=vss}
-N 80 160 330 160 {lab=vss}
-N 330 -90 330 160 {lab=vss}
-C {blocks/andgate/schematic/andgate.sym} -130 70 1 0 {name=x1}
-C {blocks/xorgate/schematic/xorgate.sym} 30 -130 0 0 {name=x2}
-C {blocks/register/schematic/register.sym} 340 -130 0 0 {name=x3}
-C {iopin.sym} -270 -120 2 0 {name=p2 lab=CE}
-C {iopin.sym} 210 100 1 0 {name=p1 lab=CLK}
-C {iopin.sym} 290 100 1 0 {name=p3 lab=CLR}
-C {iopin.sym} -30 130 0 0 {name=p4 lab=Sout}
-C {iopin.sym} 80 -280 3 0 {name=p5 lab=vdd}
-C {iopin.sym} 80 180 1 0 {name=p7 lab=vss}
-C {iopin.sym} 490 -130 0 0 {name=p13 lab=D1}
+N -310 -170 -240 -170 {lab=#net1}
+N -480 -160 -410 -160 {lab=in}
+N -480 -160 -480 -80 {lab=in}
+N -550 -160 -480 -160 {lab=in}
+N -460 -100 -460 -80 {lab=b}
+N -440 -180 -410 -180 {lab=a}
+N -390 -40 -390 -10 {lab=vdd}
+N -430 -40 -390 -40 {lab=vdd}
+N -550 -40 -550 -10 {lab=vss}
+N -550 -40 -510 -40 {lab=vss}
+N -390 -60 -390 -40 {lab=vdd}
+N -550 -60 -550 -40 {lab=vss}
+N -390 -10 -380 -10 {lab=vdd}
+N -390 -60 -380 -60 {lab=vdd}
+N -360 -120 -360 -90 {lab=vss}
+N -360 -240 -360 -220 {lab=vdd}
+N -470 20 -470 40 {lab=#net2}
+N -200 -130 -200 -80 {lab=nlck}
+N -160 -250 -160 -210 {lab=vdd}
+N -200 -250 -200 -210 {lab=clk}
+N -160 -130 -160 -80 {lab=vdd}
+N -110 -170 -40 -170 {lab=out}
+N -40 -200 -30 -200 {lab=out}
+N -40 -170 -40 -140 {lab=out}
+N -40 -200 -40 -170 {lab=out}
+N -40 -140 -30 -140 {lab=out}
+C {blocks/xorgate/schematic/xorgate.sym} -410 -170 0 0 {name=x2}
+C {blocks/register/schematic/register.sym} -150 -170 0 0 {name=x3}
+C {iopin.sym} -550 -160 2 0 {name=p2 lab=in}
+C {blocks/andgate/schematic/andgate.sym} -480 -80 1 0 {name=x1}
+C {lab_pin.sym} -440 -180 0 0 {name=p1 sig_type=std_logic lab=a}
+C {lab_pin.sym} -460 -100 2 0 {name=p3 sig_type=std_logic lab=b}
+C {iopin.sym} -550 -10 2 0 {name=p5 lab=vss}
+C {iopin.sym} -380 -10 0 0 {name=p6 lab=vdd}
+C {lab_pin.sym} -550 -60 0 0 {name=p7 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -380 -60 2 0 {name=p8 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -360 -90 2 0 {name=p9 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -360 -240 2 0 {name=p10 sig_type=std_logic lab=vdd}
+C {iopin.sym} -200 -80 2 0 {name=p12 lab=nlck}
+C {iopin.sym} -200 -250 2 0 {name=p13 lab=clk}
+C {lab_pin.sym} -160 -250 2 0 {name=p14 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -160 -80 2 0 {name=p15 sig_type=std_logic lab=vdd}
+C {iopin.sym} -30 -140 0 0 {name=p11 lab=out}

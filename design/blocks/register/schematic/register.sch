@@ -50,7 +50,7 @@ N 1430 1120 1430 1160 {lab=vdd}
 N 1240 1110 1240 1140 {lab=vss}
 N 1240 1010 1240 1050 {lab=vdd}
 N 1620 1280 1620 1320 {lab=noten}
-N 1620 1170 1620 1200 {lab=#net8}
+N 1620 1170 1620 1200 {lab=en}
 N 1640 1110 1640 1140 {lab=vss}
 N 1640 1010 1640 1050 {lab=vdd}
 N 1790 1270 1790 1310 {lab=vdd}
@@ -58,7 +58,6 @@ N 1480 1120 1480 1160 {lab=en}
 N 1480 1010 1480 1040 {lab=noten}
 N 1120 1080 1190 1080 {lab=#net3}
 C {blocks/inverter/schematic/inverter.sym} 480 1070 0 0 {name=x1}
-C {blocks/transmissiongate/schematic/transmissiongate.sym} 760 1090 0 0 {name=x2}
 C {blocks/inverter/schematic/inverter.sym} 880 1070 0 0 {name=x3}
 C {blocks/inverter/schematic/inverter.sym} 1070 1250 2 0 {name=x4}
 C {blocks/transmissiongate/schematic/transmissiongate.sym} 760 1090 0 0 {name=x5}
@@ -88,7 +87,6 @@ C {lab_pin.sym} 880 1170 0 0 {name=p23 sig_type=std_logic lab=noten}
 C {lab_pin.sym} 880 1320 0 0 {name=p24 sig_type=std_logic lab=en}
 C {lab_pin.sym} 900 1010 2 0 {name=p25 sig_type=std_logic lab=vdd}
 C {blocks/inverter/schematic/inverter.sym} 1220 1070 0 0 {name=x7}
-C {blocks/transmissiongate/schematic/transmissiongate.sym} 1500 1090 0 0 {name=x8}
 C {blocks/inverter/schematic/inverter.sym} 1620 1070 0 0 {name=x9}
 C {blocks/inverter/schematic/inverter.sym} 1810 1250 2 0 {name=x10}
 C {blocks/transmissiongate/schematic/transmissiongate.sym} 1500 1090 0 0 {name=x11}
