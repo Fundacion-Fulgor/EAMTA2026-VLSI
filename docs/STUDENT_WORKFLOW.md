@@ -247,3 +247,4 @@ Before submitting your PR, ensure:
 - [ngspice Examples](http://ngspice.sourceforge.net/docs.html)
 - [KLayout User Manual](https://www.klayout.de/doc-qt5/index.html)
 - [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
+- [IHP PDK Layout rules](https://ihp-open-pdk-docs.readthedocs.io/en/latest/layout_rules/01_general.html)
