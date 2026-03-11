@@ -49,13 +49,13 @@ N 1430 1010 1430 1040 {lab=vss}
 N 1430 1120 1430 1160 {lab=vdd}
 N 1240 1110 1240 1140 {lab=vss}
 N 1240 1010 1240 1050 {lab=vdd}
-N 1620 1280 1620 1320 {lab=en}
-N 1620 1170 1620 1200 {lab=noten}
+N 1620 1280 1620 1320 {lab=noten}
+N 1620 1170 1620 1200 {lab=#net8}
 N 1640 1110 1640 1140 {lab=vss}
 N 1640 1010 1640 1050 {lab=vdd}
 N 1790 1270 1790 1310 {lab=vdd}
-N 1480 1120 1480 1160 {lab=noten}
-N 1480 1010 1480 1040 {lab=en}
+N 1480 1120 1480 1160 {lab=en}
+N 1480 1010 1480 1040 {lab=noten}
 N 1120 1080 1190 1080 {lab=#net3}
 C {blocks/inverter/schematic/inverter.sym} 480 1070 0 0 {name=x1}
 C {blocks/transmissiongate/schematic/transmissiongate.sym} 760 1090 0 0 {name=x2}
@@ -102,8 +102,8 @@ C {lab_pin.sym} 1640 1140 2 0 {name=p33 sig_type=std_logic lab=vss}
 C {lab_pin.sym} 1670 1320 2 0 {name=p34 sig_type=std_logic lab=vss}
 C {lab_pin.sym} 1790 1170 2 0 {name=p35 sig_type=std_logic lab=vss}
 C {lab_pin.sym} 1240 1140 2 0 {name=p36 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 1480 1160 2 0 {name=p37 sig_type=std_logic lab=noten}
-C {lab_pin.sym} 1480 1010 2 0 {name=p38 sig_type=std_logic lab=en}
-C {lab_pin.sym} 1620 1170 0 0 {name=p39 sig_type=std_logic lab=noten}
-C {lab_pin.sym} 1620 1320 0 0 {name=p40 sig_type=std_logic lab=en}
+C {lab_pin.sym} 1480 1010 2 0 {name=p37 sig_type=std_logic lab=noten}
+C {lab_pin.sym} 1480 1160 2 0 {name=p38 sig_type=std_logic lab=en}
+C {lab_pin.sym} 1620 1320 0 0 {name=p39 sig_type=std_logic lab=noten}
+C {lab_pin.sym} 1620 1170 0 0 {name=p40 sig_type=std_logic lab=en}
 C {lab_pin.sym} 1640 1010 2 0 {name=p41 sig_type=std_logic lab=vdd}
