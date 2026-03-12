@@ -5,137 +5,90 @@ V {}
 S {}
 F {}
 E {}
-N -110 -120 30 -120 {lab=CE}
-N -110 -120 -110 -80 {lab=CE}
-N -270 -120 -110 -120 {lab=CE}
-N -140 -140 -140 -80 {lab=D0}
-N -30 -140 30 -140 {lab=D0}
-N 130 -130 250 -130 {lab=#net1}
-N 440 -130 490 -130 {lab=D0}
-N 440 -220 440 -130 {lab=D0}
-N 380 -130 440 -130 {lab=D0}
-N -30 -220 440 -220 {lab=D0}
-N -30 -220 -30 -140 {lab=D0}
-N -140 -140 -30 -140 {lab=D0}
-N -120 230 20 230 {lab=#net2}
-N -120 230 -120 270 {lab=#net2}
-N -150 210 -150 270 {lab=D1}
-N -40 210 20 210 {lab=D1}
-N 120 220 240 220 {lab=#net3}
-N 430 220 480 220 {lab=D1}
-N 430 130 430 220 {lab=D1}
-N 370 220 430 220 {lab=D1}
-N -40 130 430 130 {lab=D1}
-N -40 130 -40 210 {lab=D1}
-N -150 210 -40 210 {lab=D1}
-N -130 80 -130 190 {lab=#net2}
-N -130 190 -120 190 {lab=#net2}
-N -120 190 -120 230 {lab=#net2}
-N -120 580 20 580 {lab=#net4}
-N -120 580 -120 620 {lab=#net4}
-N -150 560 -150 620 {lab=D2}
-N -40 560 20 560 {lab=D2}
-N 120 570 240 570 {lab=#net5}
-N 430 570 480 570 {lab=D2}
-N 430 480 430 570 {lab=D2}
-N 370 570 430 570 {lab=D2}
-N -40 480 430 480 {lab=D2}
-N -40 480 -40 560 {lab=D2}
-N -150 560 -40 560 {lab=D2}
-N -140 430 -140 540 {lab=#net4}
-N -140 540 -120 540 {lab=#net4}
-N -120 540 -120 580 {lab=#net4}
-N 120 870 240 870 {lab=#net6}
-N 420 870 480 870 {lab=D3}
-N -140 780 -140 880 {lab=#net7}
-N -140 880 20 880 {lab=#net7}
-N -20 860 20 860 {lab=D3}
-N -20 750 -20 860 {lab=D3}
-N -20 750 420 750 {lab=D3}
-N 420 750 420 870 {lab=D3}
-N 370 870 420 870 {lab=D3}
-N 280 1030 280 1100 {lab=CLK}
-N 180 610 280 610 {lab=CLK}
-N 180 1030 280 1030 {lab=CLK}
-N 280 910 280 1030 {lab=CLK}
-N 180 260 280 260 {lab=CLK}
-N 180 610 180 1030 {lab=CLK}
-N 180 260 180 610 {lab=CLK}
-N 180 -90 290 -90 {lab=CLK}
-N 180 -90 180 260 {lab=CLK}
-N 290 -350 290 -170 {lab=CLR}
-N 200 180 280 180 {lab=CLR}
-N 200 -350 200 180 {lab=CLR}
-N 200 -350 290 -350 {lab=CLR}
-N 290 -420 290 -350 {lab=CLR}
-N 200 530 280 530 {lab=CLR}
-N 200 180 200 530 {lab=CLR}
-N 200 830 280 830 {lab=CLR}
-N 200 530 200 830 {lab=CLR}
-N 320 260 320 330 {lab=vss}
-N 70 270 70 330 {lab=vss}
-N 140 330 140 670 {lab=vss}
-N 140 330 320 330 {lab=vss}
-N 70 330 140 330 {lab=vss}
-N 320 610 320 670 {lab=vss}
-N 140 670 320 670 {lab=vss}
-N 70 620 70 670 {lab=vss}
-N 70 670 140 670 {lab=vss}
-N 140 960 140 1100 {lab=vss}
-N 140 670 140 960 {lab=vss}
-N 320 910 320 960 {lab=vss}
-N 140 960 320 960 {lab=vss}
-N 70 920 70 960 {lab=vss}
-N 70 960 140 960 {lab=vss}
-N -240 330 -210 330 {lab=vss}
-N -240 680 -210 680 {lab=vss}
-N -240 680 -240 960 {lab=vss}
-N -240 960 70 960 {lab=vss}
-N 80 -80 80 -40 {lab=vss}
-N 80 -40 140 -40 {lab=vss}
-N 140 -40 140 330 {lab=vss}
-N 140 -40 330 -40 {lab=vss}
-N 330 -100 330 -40 {lab=vss}
-N -240 -20 -200 -20 {lab=vss}
-N -240 330 -240 680 {lab=vss}
-N -240 -20 -240 330 {lab=vss}
-N 80 -270 80 -180 {lab=vdd}
-N 330 -270 330 -170 {lab=vdd}
-N 80 -270 330 -270 {lab=vdd}
-N 80 -420 80 -270 {lab=vdd}
-N 70 70 70 170 {lab=vdd}
-N -10 70 70 70 {lab=vdd}
-N -10 -270 80 -270 {lab=vdd}
-N -10 -270 -10 70 {lab=vdd}
-N 70 70 320 70 {lab=vdd}
-N 320 70 320 180 {lab=vdd}
-N 70 440 70 520 {lab=vdd}
-N -10 70 -10 440 {lab=vdd}
-N -10 440 70 440 {lab=vdd}
-N 70 440 320 440 {lab=vdd}
-N 320 440 320 530 {lab=vdd}
-N -10 440 -10 720 {lab=vdd}
-N -10 720 70 720 {lab=vdd}
-N 70 720 70 820 {lab=vdd}
-N 70 720 320 720 {lab=vdd}
-N 320 720 320 830 {lab=vdd}
-C {blocks/andgate/schematic/andgate.sym} -130 70 1 0 {name=x1}
-C {blocks/xorgate/schematic/xorgate.sym} 30 -130 0 0 {name=x2}
-C {blocks/register/schematic/register.sym} 340 -130 0 0 {name=x3}
-C {iopin.sym} -270 -120 2 0 {name=p2 lab=CE}
-C {iopin.sym} 280 1100 1 0 {name=p1 lab=CLK}
-C {iopin.sym} 290 -420 3 0 {name=p3 lab=CLR}
-C {iopin.sym} 80 -420 3 0 {name=p5 lab=vdd}
-C {iopin.sym} 140 1100 1 0 {name=p7 lab=vss}
-C {iopin.sym} 490 -130 0 0 {name=p13 lab=D0}
-C {blocks/andgate/schematic/andgate.sym} -140 420 1 0 {name=x4}
-C {blocks/xorgate/schematic/xorgate.sym} 20 220 0 0 {name=x5}
-C {blocks/register/schematic/register.sym} 330 220 0 0 {name=x6}
-C {iopin.sym} 480 220 0 0 {name=p4 lab=D1}
-C {blocks/andgate/schematic/andgate.sym} -140 770 1 0 {name=x7}
-C {blocks/xorgate/schematic/xorgate.sym} 20 570 0 0 {name=x8}
-C {blocks/register/schematic/register.sym} 330 570 0 0 {name=x9}
-C {iopin.sym} 480 570 0 0 {name=p6 lab=D2}
-C {blocks/register/schematic/register.sym} 330 870 0 0 {name=x10}
-C {iopin.sym} 480 870 0 0 {name=p8 lab=D3}
-C {blocks/xorgate/schematic/xorgate.sym} 20 870 0 0 {name=x11}
+N -390 -30 -350 -30 {lab=nclk}
+N -390 -50 -350 -50 {lab=vss}
+N -390 -70 -350 -70 {lab=rst}
+N -390 -90 -350 -90 {lab=0b}
+N -390 -110 -350 -110 {lab=vdd}
+N -390 -130 -350 -130 {lab=clk}
+N -390 -150 -350 -150 {lab=vdd}
+N -390 140 -350 140 {lab=nclk}
+N -390 120 -350 120 {lab=vss}
+N -390 100 -350 100 {lab=rst}
+N -390 80 -350 80 {lab=1b}
+N -390 60 -350 60 {lab=0b}
+N -390 40 -350 40 {lab=clk}
+N -390 20 -350 20 {lab=vdd}
+N -390 310 -350 310 {lab=nclk}
+N -390 290 -350 290 {lab=vss}
+N -390 270 -350 270 {lab=rst}
+N -390 250 -350 250 {lab=2b}
+N -390 230 -350 230 {lab=1b}
+N -390 210 -350 210 {lab=clk}
+N -390 190 -350 190 {lab=vdd}
+N -390 480 -350 480 {lab=nclk}
+N -390 460 -350 460 {lab=vss}
+N -390 440 -350 440 {lab=rst}
+N -390 420 -350 420 {lab=3b}
+N -390 400 -350 400 {lab=2b}
+N -390 380 -350 380 {lab=clk}
+N -390 360 -350 360 {lab=vdd}
+N -200 -30 -170 -30 {lab=nclk}
+N -200 -50 -170 -50 {lab=vss}
+N -200 -70 -170 -70 {lab=rst}
+N -200 -130 -170 -130 {lab=clk}
+N -200 -150 -170 -150 {lab=vdd}
+N -200 130 -160 130 {lab=3b}
+N -200 100 -160 100 {lab=2b}
+N -200 70 -160 70 {lab=1b}
+N -200 40 -160 40 {lab=0b}
+C {blocks/count1bit/schematic/count1bit.sym} -540 -90 0 0 {name=x1}
+C {lab_pin.sym} -350 -150 2 0 {name=p1 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -350 -130 2 0 {name=p2 sig_type=std_logic lab=clk}
+C {lab_pin.sym} -350 -90 2 0 {name=p4 sig_type=std_logic lab=0b}
+C {lab_pin.sym} -350 -70 2 0 {name=p5 sig_type=std_logic lab=rst}
+C {lab_pin.sym} -350 -50 2 0 {name=p6 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -350 -30 2 0 {name=p7 sig_type=std_logic lab=nclk}
+C {blocks/count1bit/schematic/count1bit.sym} -540 80 0 0 {name=x2}
+C {lab_pin.sym} -350 20 2 0 {name=p8 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -350 40 2 0 {name=p9 sig_type=std_logic lab=clk}
+C {lab_pin.sym} -350 60 2 0 {name=p10 sig_type=std_logic lab=0b}
+C {lab_pin.sym} -350 80 2 0 {name=p11 sig_type=std_logic lab=1b}
+C {lab_pin.sym} -350 100 2 0 {name=p12 sig_type=std_logic lab=rst}
+C {lab_pin.sym} -350 120 2 0 {name=p13 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -350 140 2 0 {name=p14 sig_type=std_logic lab=nclk}
+C {blocks/count1bit/schematic/count1bit.sym} -540 250 0 0 {name=x3}
+C {lab_pin.sym} -350 190 2 0 {name=p15 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -350 210 2 0 {name=p16 sig_type=std_logic lab=clk}
+C {lab_pin.sym} -350 230 2 0 {name=p17 sig_type=std_logic lab=1b}
+C {lab_pin.sym} -350 250 2 0 {name=p18 sig_type=std_logic lab=2b}
+C {lab_pin.sym} -350 270 2 0 {name=p19 sig_type=std_logic lab=rst}
+C {lab_pin.sym} -350 290 2 0 {name=p20 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -350 310 2 0 {name=p21 sig_type=std_logic lab=nclk}
+C {blocks/count1bit/schematic/count1bit.sym} -540 420 0 0 {name=x4}
+C {lab_pin.sym} -350 360 2 0 {name=p22 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -350 380 2 0 {name=p23 sig_type=std_logic lab=clk}
+C {lab_pin.sym} -350 400 2 0 {name=p24 sig_type=std_logic lab=2b}
+C {lab_pin.sym} -350 420 2 0 {name=p25 sig_type=std_logic lab=3b}
+C {lab_pin.sym} -350 440 2 0 {name=p26 sig_type=std_logic lab=rst}
+C {lab_pin.sym} -350 460 2 0 {name=p27 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -350 480 2 0 {name=p28 sig_type=std_logic lab=nclk}
+C {lab_pin.sym} -170 -150 2 0 {name=p29 sig_type=std_logic lab=vdd}
+C {lab_pin.sym} -170 -130 2 0 {name=p30 sig_type=std_logic lab=clk}
+C {lab_pin.sym} -170 -70 2 0 {name=p31 sig_type=std_logic lab=rst}
+C {lab_pin.sym} -170 -50 2 0 {name=p33 sig_type=std_logic lab=vss}
+C {lab_pin.sym} -170 -30 2 0 {name=p34 sig_type=std_logic lab=nclk}
+C {iopin.sym} -200 -150 2 0 {name=p35 lab=vdd}
+C {iopin.sym} -200 -130 2 0 {name=p36 lab=clk}
+C {iopin.sym} -200 -70 2 0 {name=p38 lab=rst}
+C {iopin.sym} -200 -50 2 0 {name=p39 lab=vss}
+C {iopin.sym} -200 -30 2 0 {name=p40 lab=nclk}
+C {lab_pin.sym} -350 -110 2 0 {name=p3 sig_type=std_logic lab=vdd}
+C {iopin.sym} -200 40 2 0 {name=p32 lab=0b}
+C {iopin.sym} -200 70 2 0 {name=p37 lab=1b}
+C {iopin.sym} -200 100 2 0 {name=p41 lab=2b}
+C {iopin.sym} -200 130 2 0 {name=p42 lab=3b}
+C {lab_pin.sym} -160 40 2 0 {name=p43 sig_type=std_logic lab=0b}
+C {lab_pin.sym} -160 70 2 0 {name=p44 sig_type=std_logic lab=1b}
+C {lab_pin.sym} -160 100 2 0 {name=p45 sig_type=std_logic lab=2b}
+C {lab_pin.sym} -160 130 2 0 {name=p46 sig_type=std_logic lab=3b}
