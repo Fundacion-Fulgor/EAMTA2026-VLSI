@@ -1,21 +1,32 @@
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/xorgate/schematic/xorgate.sch
-**.subckt xorgate vdd out vss a_in b_in
-*.iopin out
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/xorgate/schematic/xorgate.sch
+**.subckt xorgate a vdd b vss out
+*.iopin a
+*.iopin b
 *.iopin vdd
 *.iopin vss
-*.iopin a_in
-*.iopin b_in
-XM0 net3 b_bis vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM1 net3 a_bis vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM2 out a_in net3 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM3 out b_in net3 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM4 out a_bis net1 vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM5 out a_in net2 vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM6 net1 b_bis vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM7 net2 b_in vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM8 a_bis a_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM9 a_bis a_in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
-XM10 b_bis b_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM11 b_bis b_in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
+*.iopin out
+XM3 out a net1 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM1 out b net1 vdd sg13_lv_pmos w=1.5u l=1.5u ng=1
+XM4 out na net2 vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+x1 vdd nb b vss inverter
+x2 vdd na a vss inverter
+XM2 net1 nb vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM5 net1 na vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM7 out a net3 vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+XM8 net2 nb vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+XM9 net3 b vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1
 **.ends
+
+* expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
+.subckt inverter vdd out in vss
+*.iopin vdd
+*.iopin out
+*.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
 .end
