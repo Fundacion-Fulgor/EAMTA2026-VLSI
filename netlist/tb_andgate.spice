@@ -1,16 +1,17 @@
 ** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_andgate.sch
 **.subckt tb_andgate
 C1 net1 avss1p8 1p
-V4 avss1p8 GND DC{vdd}
+V4 avss1p8 GND DC{vss}
 V5 avdd1p8 avss1p8 DC{vdd}
-V6 vin avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2}) DC 0 AC 0
-x1 avdd1p8 vin GND vout avss1p8 andgate
-x2 avdd1p8 vout net1 avss1p8 inverter
+V6 vb avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2}) DC 0 AC 0
+x2 avdd1p8 net1 vout avss1p8 inverter
+V1 va avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/2} {Tclk}) DC 0 AC 0
+x1 avdd1p8 va vb vout avss1p8 andgate
 **** begin user architecture code
 
 
 * Circuit Parameters
-.param vdd = 1
+.param vdd = 1.2
 .param vss = 0.0
 .param Tclk = 10n
 .options TEMP = 27.0
@@ -22,11 +23,7 @@ x2 avdd1p8 vout net1 avss1p8 inverter
 .control
 tran 0.01u 100n
 setplot tran1
-plot v(vin) v(vout)+1
-reset
-dc V6 0 1 0.01
-setplot dc
-plot vin vout ylabel vout xlabel vin
+plot v(va) v(vb) + 1.2 v(vout) + 2.4
 set filetype = ascii
 write dcsweep.raw
 .endc
@@ -36,34 +33,33 @@ write dcsweep.raw
 **** end user architecture code
 **.ends
 
-* expanding   symbol:  blocks/andgate/schematic/andgate.sym # of pins=5
-** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sym
-** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sch
-.subckt andgate vdd A B Z vss
-*.iopin A
-*.iopin vdd
-*.iopin vss
-*.iopin B
-*.iopin Z
-XM1 net1 A vdd vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
-XM2 vdd B net1 vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
-XM3 net1 A net2 vss sg13_lv_nmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
-XM4 net2 B vss vss sg13_lv_nmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
-XM5 Z net1 vdd vdd sg13_lv_pmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
-XM6 Z net1 vss vss sg13_lv_nmos w=1.0u l=0.72u ng=1 m=1 rfmode=1
-.ends
-
-
 * expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
 ** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
 ** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
-.subckt inverter vdd in out vss
-*.iopin in
+.subckt inverter vdd out in vss
+*.iopin vdd
 *.iopin out
 *.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/andgate/schematic/andgate.sym # of pins=5
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sch
+.subckt andgate vdd a b out vss
+*.iopin b
+*.iopin a
 *.iopin vdd
-XM1 out in vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
-XM2 out in vss vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+*.iopin vss
+*.iopin out
+XM1 net1 b vss vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+XM4 net2 a vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
+x1 vdd out net2 vss inverter
+XM3 net2 a net1 vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+XM5 net2 b vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
 .ends
 
 .GLOBAL GND

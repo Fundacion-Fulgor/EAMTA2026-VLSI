@@ -1,4 +1,4 @@
-* Extracted by KLayout with SG13G2 LVS runset on : 11/03/2026 21:47
+* Extracted by KLayout with SG13G2 LVS runset on : 12/03/2026 19:00
 
 .SUBCKT inverter
 M$1 \$1 \$4 \$2 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p PS=2.18u

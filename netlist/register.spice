@@ -1,0 +1,52 @@
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/register/schematic/register.sch
+**.subckt register en noten vss vdd out in rst
+*.iopin in
+*.iopin vdd
+*.iopin vss
+*.iopin en
+*.iopin noten
+*.iopin out
+*.iopin rst
+x1 vdd net1 in vss inverter
+x3 vdd net3 net2 vss inverter
+x4 vdd net4 net3 vss inverter
+x5 net1 vdd noten net2 vss en transmissiongate
+x6 net4 vdd en net2 vss noten transmissiongate
+x2 vss vdd nrst net3 vss rst transmissiongate
+x8 vss nrst rst vss inverter
+x7 vdd net5 net3 vss inverter
+x9 vdd out net6 vss inverter
+x10 vdd net7 out vss inverter
+x11 net5 vdd en net6 vss noten transmissiongate
+x12 net7 vdd noten net6 vss en transmissiongate
+x13 vss vdd nrst out vss rst transmissiongate
+**.ends
+
+* expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
+.subckt inverter vdd out in vss
+*.iopin vdd
+*.iopin out
+*.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/transmissiongate/schematic/transmissiongate.sym # of pins=6
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sch
+.subckt transmissiongate in vdd noten out vss en
+*.iopin noten
+*.iopin en
+*.iopin in
+*.iopin out
+*.iopin vdd
+*.iopin vss
+XM1 out noten in vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM2 out en in vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+.ends
+
+.end

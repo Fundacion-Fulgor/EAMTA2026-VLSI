@@ -1,0 +1,63 @@
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/dff/schematic/dff.sch
+**.subckt dff vss clk out rst in nclk vdd
+*.iopin vss
+*.iopin in
+*.iopin vdd
+*.iopin out
+*.iopin rst
+*.iopin clk
+*.iopin nclk
+x1 in vdd nclk net1 vss clk transmissiongate
+x2 vdd rst net2 net3 vss norgate
+x5 vdd net2 net1 vss inverter
+x7 net3 vdd clk net1 vss nclk transmissiongate
+x3 net3 vdd clk net4 vss nclk transmissiongate
+x4 vdd rst net5 out vss norgate
+x6 vdd net5 net4 vss inverter
+x8 out vdd nclk net4 vss clk transmissiongate
+**.ends
+
+* expanding   symbol:  blocks/transmissiongate/schematic/transmissiongate.sym # of pins=6
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sch
+.subckt transmissiongate in vdd noten out vss en
+*.iopin noten
+*.iopin en
+*.iopin in
+*.iopin out
+*.iopin vdd
+*.iopin vss
+XM1 out noten in vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM2 out en in vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/norgate/schematic/norgate.sym # of pins=5
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/norgate/schematic/norgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/norgate/schematic/norgate.sch
+.subckt norgate vdd a b out vss
+*.iopin vdd
+*.iopin vss
+*.iopin b
+*.iopin a
+*.iopin out
+XM1 out a vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM4 out a net1 vdd sg13_lv_pmos w=3u l=0.15u ng=1
+XM3 out b vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM5 net1 b vdd vdd sg13_lv_pmos w=3u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
+.subckt inverter vdd out in vss
+*.iopin vdd
+*.iopin out
+*.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
+.end

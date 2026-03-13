@@ -1,11 +1,11 @@
-** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_inverter.sch/tb_inverter.sch
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_inverter.sch
 **.subckt tb_inverter
 C1 net1 avss1p8 1p
-V4 avss1p8 GND DC{vdd}
+V4 avss1p8 GND DC{vss}
 V5 avdd1p8 avss1p8 DC{vdd}
-V6 vin avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2}) DC 0 AC 0
-x1 avdd1p8 vin vout avss1p8 inverter
-x2 avdd1p8 vout net1 avss1p8 inverter
+V6 in avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2}) DC 0 AC 0
+x2 avdd1p8 net1 vout avss1p8 inverter
+x1 avdd1p8 vout in avss1p8 inverter
 **** begin user architecture code
 
 
@@ -22,11 +22,7 @@ x2 avdd1p8 vout net1 avss1p8 inverter
 .control
 tran 0.01u 100n
 setplot tran1
-plot v(vin) v(vout)+1.2
-reset
-dc V6 0 1.2 0.01
-setplot dc
-plot vin vout ylabel vout xlabel vin
+plot v(in) v(vout) + 1.2 v(vout)
 set filetype = ascii
 write dcsweep.raw
 .endc
@@ -39,13 +35,13 @@ write dcsweep.raw
 * expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
 ** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
 ** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
-.subckt inverter vdd in out vss
-*.iopin in
+.subckt inverter vdd out in vss
+*.iopin vdd
 *.iopin out
 *.iopin vss
-*.iopin vdd
-XM1 out in vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
-XM2 out in vss vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
 .ends
 
 .GLOBAL GND

@@ -1,0 +1,12 @@
+* Extracted by KLayout with SG13G2 LVS runset on : 12/03/2026 22:12
+
+.SUBCKT norgate
+M$1 \$1 \$5 \$2 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.1425p PS=2.18u
++ PD=1.13u
+M$2 \$2 \$6 \$1 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.1425p AD=0.255p PS=1.13u
++ PD=2.18u
+M$3 \$2 \$5 \$3 \$4 sg13_lv_pmos L=0.15u W=3u AS=1.02p AD=0.57p PS=6.68u
++ PD=3.38u
+M$4 \$3 \$6 \$4 \$4 sg13_lv_pmos L=0.15u W=3u AS=0.57p AD=1.02p PS=3.38u
++ PD=6.68u
+.ENDS norgate
