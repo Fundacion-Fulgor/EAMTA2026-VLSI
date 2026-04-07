@@ -1,0 +1,65 @@
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_transmissiongate.sch
+**.subckt tb_transmissiongate
+C1 net1 avss1p8 1p
+V4 avss1p8 GND DC{vss}
+V5 avdd1p8 avss1p8 DC{vdd}
+V6 in avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2}) DC 0 AC 0
+x2 avdd1p8 net1 vout avss1p8 inverter
+V1 en avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/2} {Tclk}) DC 0 AC 0
+x3 avdd1p8 noten en avss1p8 inverter
+x1 in noten noten vout avdd1p8 en transmissiongate
+**** begin user architecture code
+
+
+* Circuit Parameters
+.param vdd = 1.2
+.param vss = 0.0
+.param Tclk = 10n
+.options TEMP = 27.0
+* Include Models - IHP SG13G2
+.lib cornerMOSlv.lib mos_tt
+* OP Parameters & Singals to save
+.save all
+*Simulations
+.control
+tran 0.01u 100n
+setplot tran1
+plot v(en) v(in) + 1.2 v(vout) + 2.4
+set filetype = ascii
+write dcsweep.raw
+.endc
+.end
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
+.subckt inverter vdd out in vss
+*.iopin vdd
+*.iopin out
+*.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/transmissiongate/schematic/transmissiongate.sym # of pins=6
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sch
+.subckt transmissiongate in vdd noten out vss en
+*.iopin noten
+*.iopin en
+*.iopin in
+*.iopin out
+*.iopin vdd
+*.iopin vss
+XM1 out noten in vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM2 out en in vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+.ends
+
+.GLOBAL GND
+.end

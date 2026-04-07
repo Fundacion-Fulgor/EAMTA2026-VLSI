@@ -1,0 +1,80 @@
+* Extracted by KLayout with SG13G2 LVS runset on : 31/03/2026 23:02
+
+.SUBCKT count1bit
+M$1 \$1 \$11 \$40 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.1425p
++ PS=2.18u PD=1.13u
+M$2 \$40 \$16 \$1 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.1425p AD=0.255p
++ PS=1.13u PD=2.18u
+M$3 \$1 \$11 \$8 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.1425p PS=2.18u
++ PD=1.13u
+M$4 \$8 \$18 \$1 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.1425p AD=0.255p PS=1.13u
++ PD=2.18u
+M$5 \$1 \$12 \$5 \$1 sg13_lv_nmos L=0.15u W=1.5u AS=0.51p AD=0.285p PS=3.68u
++ PD=1.88u
+M$6 \$5 \$13 \$6 \$1 sg13_lv_nmos L=0.15u W=1.5u AS=0.285p AD=0.51p PS=1.88u
++ PD=3.68u
+M$7 \$1 \$3 \$7 \$1 sg13_lv_nmos L=0.15u W=1.5u AS=0.51p AD=0.285p PS=3.68u
++ PD=1.88u
+M$8 \$7 \$8 \$6 \$1 sg13_lv_nmos L=0.15u W=1.5u AS=0.285p AD=0.51p PS=1.88u
++ PD=3.68u
+M$9 \$1 \$3 \$9 \$1 sg13_lv_nmos L=0.15u W=1.5u AS=0.51p AD=0.285p PS=3.68u
++ PD=1.88u
+M$10 \$9 \$8 \$10 \$1 sg13_lv_nmos L=0.15u W=1.5u AS=0.285p AD=0.51p PS=1.88u
++ PD=3.68u
+M$11 \$6 \$4 \$15 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p PS=2.18u
++ PD=2.18u
+M$12 \$40 \$2 \$15 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p
++ PS=2.18u PD=2.18u
+M$13 \$40 \$2 \$17 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p
++ PS=2.18u PD=2.18u
+M$14 \$8 \$4 \$17 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p PS=2.18u
++ PD=2.18u
+M$15 \$1 \$3 \$12 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p PS=2.18u
++ PD=2.18u
+M$16 \$1 \$8 \$13 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p PS=2.18u
++ PD=2.18u
+M$17 \$1 \$10 \$14 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p
++ PS=2.18u PD=2.18u
+M$18 \$1 \$15 \$16 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p
++ PS=2.18u PD=2.18u
+M$19 \$1 \$17 \$18 \$1 sg13_lv_nmos L=0.15u W=0.75u AS=0.255p AD=0.255p
++ PS=2.18u PD=2.18u
+M$20 \$40 \$11 \$41 \$38 sg13_lv_pmos L=0.15u W=3u AS=1.02p AD=0.57p PS=6.68u
++ PD=3.38u
+M$21 \$41 \$16 \$38 \$38 sg13_lv_pmos L=0.15u W=3u AS=0.57p AD=1.02p PS=3.38u
++ PD=6.68u
+M$22 \$8 \$11 \$42 \$38 sg13_lv_pmos L=0.15u W=3u AS=1.02p AD=0.57p PS=6.68u
++ PD=3.38u
+M$23 \$42 \$18 \$38 \$38 sg13_lv_pmos L=0.15u W=3u AS=0.57p AD=1.02p PS=3.38u
++ PD=6.68u
+M$24 \$38 \$3 \$12 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$25 \$38 \$8 \$13 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$26 \$38 \$12 \$39 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.285p
++ PS=3.68u PD=1.88u
+M$27 \$39 \$13 \$38 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.285p AD=0.51p
++ PS=1.88u PD=3.68u
+M$28 \$39 \$3 \$6 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.285p PS=3.68u
++ PD=1.88u
+M$29 \$6 \$8 \$39 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.285p AD=0.51p PS=1.88u
++ PD=3.68u
+M$30 \$38 \$3 \$10 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.285p PS=3.68u
++ PD=1.88u
+M$31 \$10 \$8 \$38 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.285p AD=0.51p PS=1.88u
++ PD=3.68u
+M$32 \$38 \$10 \$14 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$33 \$6 \$2 \$15 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$34 \$38 \$15 \$16 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$35 \$40 \$4 \$15 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$36 \$40 \$4 \$17 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$37 \$38 \$17 \$18 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+M$38 \$8 \$2 \$17 \$38 sg13_lv_pmos L=0.15u W=1.5u AS=0.51p AD=0.51p PS=3.68u
++ PD=3.68u
+.ENDS count1bit

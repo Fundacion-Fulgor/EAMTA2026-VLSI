@@ -1,0 +1,150 @@
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/tb_count.sch
+**.subckt tb_count
+C1 net1 avss1p8 1p
+V4 avss1p8 GND DC{vss}
+V5 avdd1p8 avss1p8 DC{vdd}
+V6 clk avss1p8 PULSE({vdd} 0 0.0 1p 1p {Tclk/4} {Tclk/2} DC 0 AC 0)
+x2 avdd1p8 net1 0b avss1p8 inverter
+x3 avdd1p8 nclk clk avss1p8 inverter
+x1 avdd1p8 clk avdd1p8 0b avss1p8 avss1p8 nclk count1bit
+**** begin user architecture code
+
+
+* Circuit Parameters
+.param vdd = 1.2
+.param vss = 0.0
+.param Tclk = 10n
+.options TEMP = 27.0
+* Include Models - IHP SG13G2
+.lib cornerMOSlv.lib mos_tt
+* OP Parameters & Singals to save
+.save all
+*Simulations
+.control
+tran 0.01u 100n
+setplot tran1
+plot v(clk) v(0b)+1.2
+reset
+dc V6 0 1.2 0.01
+setplot dc
+set filetype = ascii
+write dcsweep.raw
+.endc
+.end
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
+.subckt inverter vdd out in vss
+*.iopin vdd
+*.iopin out
+*.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/count1bit/schematic/count1bit.sym # of pins=7
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/count1bit/schematic/count1bit.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/count1bit/schematic/count1bit.sch
+.subckt count1bit vdd clk in out rst vss nlck
+*.iopin in
+*.iopin nlck
+*.iopin clk
+*.iopin out
+*.iopin rst
+*.iopin vss
+*.iopin vdd
+x2 net2 vdd in vss net1 xorgate
+x3 clk nlck vss vdd net2 net1 rst register
+x1 vdd net2 in out vss andgate
+.ends
+
+
+* expanding   symbol:  blocks/xorgate/schematic/xorgate.sym # of pins=5
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/xorgate/schematic/xorgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/xorgate/schematic/xorgate.sch
+.subckt xorgate a vdd b vss out
+*.iopin a
+*.iopin b
+*.iopin vdd
+*.iopin vss
+*.iopin out
+XM3 out a net1 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM1 out b net1 vdd sg13_lv_pmos w=0.75u l=0.15u ng=1
+XM4 out na net2 vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+x1 vdd nb b vss inverter
+x2 vdd na a vss inverter
+XM2 net1 nb vdd vdd sg13_lv_pmos w=0.75u l=0.15u ng=1
+XM5 net1 na vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM7 out a net3 vss sg13_lv_nmos w=0.15u l=0.15u ng=1
+XM8 net2 nb vss vss sg13_lv_nmos w=0.3u l=0.15u ng=1
+XM9 net3 b vss vss sg13_lv_nmos w=0.3u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/register/schematic/register.sym # of pins=7
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/register/schematic/register.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/register/schematic/register.sch
+.subckt register en noten vss vdd out in rst
+*.iopin in
+*.iopin vdd
+*.iopin vss
+*.iopin en
+*.iopin noten
+*.iopin out
+*.iopin rst
+x1 vdd net1 in vss inverter
+x3 vdd net3 net2 vss inverter
+x4 vdd net4 net3 vss inverter
+x5 net1 vdd noten net2 vss en transmissiongate
+x6 net4 vdd en net2 vss noten transmissiongate
+x2 vss vdd nrst net3 vss rst transmissiongate
+x8 vss nrst rst vss inverter
+x7 vdd net5 net3 vss inverter
+x9 vdd out net6 vss inverter
+x10 vdd net7 out vss inverter
+x11 net5 vdd en net6 vss noten transmissiongate
+x12 net7 vdd noten net6 vss en transmissiongate
+x13 vss vdd nrst out vss rst transmissiongate
+.ends
+
+
+* expanding   symbol:  blocks/andgate/schematic/andgate.sym # of pins=5
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sch
+.subckt andgate vdd a b out vss
+*.iopin b
+*.iopin a
+*.iopin vdd
+*.iopin vss
+*.iopin out
+XM1 net1 b vss vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+XM4 net2 a vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
+x1 vdd out net2 vss inverter
+XM3 net2 a net1 vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+XM5 net2 b vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/transmissiongate/schematic/transmissiongate.sym # of pins=6
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sch
+.subckt transmissiongate in vdd noten out vss en
+*.iopin noten
+*.iopin en
+*.iopin in
+*.iopin out
+*.iopin vdd
+*.iopin vss
+XM1 out noten in vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM2 out en in vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+.ends
+
+.GLOBAL GND
+.end

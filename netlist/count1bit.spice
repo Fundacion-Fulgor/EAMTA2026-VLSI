@@ -1,124 +1,119 @@
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/count1bit/schematic/count1bit.sch
-**.subckt count1bit vdd Dn CLK CE vss CLR Sout
-*.iopin Dn
-*.iopin CLK
-*.iopin CLR
-*.iopin Sout
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/count1bit/schematic/count1bit.sch
+**.subckt count1bit vdd clk in out rst vss nlck
+*.iopin in
+*.iopin nlck
+*.iopin clk
+*.iopin out
+*.iopin rst
 *.iopin vss
-*.iopin CE
 *.iopin vdd
-x1 net1 Dn CLR net2 vdd CLK vss dff
-x2 vdd net1 vss Dn CE xorgate
-x3 vdd CE Sout Dn vss andgate
+x2 net2 vdd in vss net1 xorgate
+x1 vdd net2 in out vss andgate
+x3 vss clk net2 rst net1 nlck vdd dff
 **.ends
 
-* expanding   symbol:  blocks/dff/schematic/dff.sym # of pins=7
-** sym_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/dff/schematic/dff.sym
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/dff/schematic/dff.sch
-.subckt dff D Q CLR Qb vdd CLK vss
-*.iopin D
-*.iopin Q
-*.iopin Qb
-*.iopin CLK
-*.iopin CLR
-*.iopin vdd
-*.iopin vss
-x1 clk_neg net1 D vdd vss clk_pos transmissiongate
-x2 clk_pos net4 net2 vdd vss clk_neg transmissiongate
-x3 clk_pos net1 net3 vdd vss clk_neg transmissiongate
-x4 clk_neg net4 Qb vdd vss clk_pos transmissiongate
-x5 vdd CLR net2 net3 vss norgate
-x6 vdd CLR net4 Q vss norgate
-x7 vdd clk_neg CLK vss inverter
-x8 vdd net2 net1 vss inverter
-x9 vdd Qb Q vss inverter
-x10 vdd clk_pos clk_neg vss inverter
-.ends
-
-
 * expanding   symbol:  blocks/xorgate/schematic/xorgate.sym # of pins=5
-** sym_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/xorgate/schematic/xorgate.sym
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/xorgate/schematic/xorgate.sch
-.subckt xorgate vdd out vss a_in b_in
-*.iopin out
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/xorgate/schematic/xorgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/xorgate/schematic/xorgate.sch
+.subckt xorgate a vdd b vss out
+*.iopin a
+*.iopin b
 *.iopin vdd
 *.iopin vss
-*.iopin a_in
-*.iopin b_in
-XM0 net3 b_bis vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM1 net3 a_bis vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM2 out a_in net3 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM3 out b_in net3 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM4 out a_bis net1 vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM5 out a_in net2 vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM6 net1 b_bis vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM7 net2 b_in vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM8 a_bis a_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM9 a_bis a_in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
-XM10 b_bis b_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM11 b_bis b_in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
+*.iopin out
+XM3 out a net1 vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM1 out b net1 vdd sg13_lv_pmos w=1.5u l=1.5u ng=1
+XM4 out na net2 vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+x1 vdd nb b vss inverter
+x2 vdd na a vss inverter
+XM2 net1 nb vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM5 net1 na vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM7 out a net3 vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+XM8 net2 nb vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+XM9 net3 b vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1
 .ends
 
 
 * expanding   symbol:  blocks/andgate/schematic/andgate.sym # of pins=5
-** sym_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/andgate/schematic/andgate.sym
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/andgate/schematic/andgate.sch
-.subckt andgate vdd a_in out b_in vss
-*.iopin b_in
-*.iopin a_in
-*.iopin out
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sch
+.subckt andgate vdd a b out vss
+*.iopin b
+*.iopin a
 *.iopin vdd
 *.iopin vss
-XM0 net2 a_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM1 net2 b_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM2 net2 a_in net1 vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM3 net1 b_in vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM4 out net2 vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM5 out net2 vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
+*.iopin out
+XM1 net1 b vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+XM4 net2 a vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+x1 vdd out net2 vss inverter
+XM3 net2 a net1 vss sg13_lv_nmos w=1.5u l=0.15u ng=1
+XM5 net2 b vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
 .ends
 
 
-* expanding   symbol:  blocks/transmissiongate/schematic/transmissiongate.sym # of pins=6
-** sym_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/transmissiongate/schematic/transmissiongate.sym
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/transmissiongate/schematic/transmissiongate.sch
-.subckt transmissiongate a_neg out in vdd vss a_pos
-*.iopin vdd
+* expanding   symbol:  blocks/dff/schematic/dff.sym # of pins=7
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/dff/schematic/dff.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/dff/schematic/dff.sch
+.subckt dff vss clk out rst in nclk vdd
 *.iopin vss
-*.iopin out
+*.iopin clk
 *.iopin in
-*.iopin a_neg
-*.iopin a_pos
-XM0 in a_neg out vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM1 out a_pos in vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
-.ends
-
-
-* expanding   symbol:  blocks/norgate/schematic/norgate.sym # of pins=5
-** sym_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/norgate/schematic/norgate.sym
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/norgate/schematic/norgate.sch
-.subckt norgate vdd b_in a_in out vss
-*.iopin a_in
-*.iopin out
-*.iopin vss
 *.iopin vdd
-*.iopin b_in
-XM1 net1 b_in vdd vdd sg13_lv_pmos w=3.0u l=0.15u ng=1 m=1
-XM2 out a_in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
-XM3 out b_in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
-XM4 out a_in net1 vdd sg13_lv_pmos w=3.0u l=0.15u ng=1 m=1
+*.iopin nclk
+*.iopin out
+*.iopin rst
+x1 in vdd nclk net1 vss clk transmissiongate
+x2 vdd rst net2 net3 vss norgate
+x5 vdd net2 net1 vss inverter
+x7 net3 vdd clk net1 vss nclk transmissiongate
+x3 net3 vdd clk net4 vss nclk transmissiongate
+x4 vdd rst net5 out vss norgate
+x6 vdd net5 net4 vss inverter
+x8 out vdd nclk net4 vss clk transmissiongate
 .ends
 
 
 * expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
-** sym_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/inverter/schematic/inverter.sym
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/inverter/schematic/inverter.sch
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
 .subckt inverter vdd out in vss
 *.iopin vdd
 *.iopin out
 *.iopin vss
 *.iopin in
-XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
-XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/transmissiongate/schematic/transmissiongate.sym # of pins=6
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/transmissiongate/schematic/transmissiongate.sch
+.subckt transmissiongate in vdd noten out vss en
+*.iopin noten
+*.iopin en
+*.iopin in
+*.iopin out
+*.iopin vdd
+*.iopin vss
+XM1 out noten in vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+XM2 out en in vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+.ends
+
+
+* expanding   symbol:  blocks/norgate/schematic/norgate.sym # of pins=5
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/norgate/schematic/norgate.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/norgate/schematic/norgate.sch
+.subckt norgate vdd a b out vss
+*.iopin vdd
+*.iopin vss
+*.iopin b
+*.iopin a
+*.iopin out
+XM1 out a vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM4 out a net1 vdd sg13_lv_pmos w=3u l=0.15u ng=1
+XM3 out b vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM5 net1 b vdd vdd sg13_lv_pmos w=3u l=0.15u ng=1
 .ends
 
 .end

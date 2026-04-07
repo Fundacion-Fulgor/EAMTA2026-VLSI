@@ -1,15 +1,27 @@
-** sch_path: /home/mateo/GitRepos/IVAN-EAMTA2026/design/blocks/andgate/schematic/andgate.sch
-**.subckt andgate vdd a_in out b_in vss
-*.iopin b_in
-*.iopin a_in
-*.iopin out
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/andgate/schematic/andgate.sch
+**.subckt andgate vdd a b out vss
+*.iopin b
+*.iopin a
 *.iopin vdd
 *.iopin vss
-XM0 net2 a_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM1 net2 b_in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM2 net2 a_in net1 vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM3 net1 b_in vss vss sg13_lv_nmos w=1.5u l=0.15u ng=1 m=1
-XM4 out net2 vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1 m=1
-XM5 out net2 vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1 m=1
+*.iopin out
+XM1 net1 b vss vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+XM4 net2 a vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
+x1 vdd out net2 vss inverter
+XM3 net2 a net1 vss sg13_lv_nmos w=0.15u l=0.13u ng=1
+XM5 net2 b vdd vdd sg13_lv_pmos w=0.15u l=0.13u ng=1
 **.ends
+
+* expanding   symbol:  blocks/inverter/schematic/inverter.sym # of pins=4
+** sym_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sym
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/inverter/schematic/inverter.sch
+.subckt inverter vdd out in vss
+*.iopin vdd
+*.iopin out
+*.iopin vss
+*.iopin in
+XM1 out in vss vss sg13_lv_nmos w=0.75u l=0.15u ng=1
+XM2 out in vdd vdd sg13_lv_pmos w=1.5u l=0.15u ng=1
+.ends
+
 .end
