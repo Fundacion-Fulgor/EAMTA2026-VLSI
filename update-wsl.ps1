@@ -49,7 +49,45 @@ fi
 echo -e "\e[1;32m[3/3]\e[0m Done! You can now start Ubuntu-24.04."
 '@
 
-wsl.exe -d Ubuntu-24.04 -u eamtastudent -- bash -c "$updateScript"
+# ── Distro and User Detection ────────────────────────────────────────────────
+# 1. Detect target distro (prefer Ubuntu-24.04, fallback to Ubuntu or default)
+$distroListRaw = wsl.exe -l -q 2>$null
+$distros = @($distroListRaw -split "\r?\n" | ForEach-Object { $_.Trim().Replace("`0", "") } | Where-Object { $_ -ne "" })
+
+if ($distros.Count -eq 0) {
+    Write-Error "No WSL distributions found. Please install WSL first using install-wsl.ps1."
+    exit 1
+}
+
+$targetDistro = $null
+if ($distros -contains "Ubuntu-24.04") {
+    $targetDistro = "Ubuntu-24.04"
+} elseif ($distros -contains "Ubuntu") {
+    $targetDistro = "Ubuntu"
+} else {
+    $targetDistro = $distros[0]
+}
+
+# 2. Check if user eamtastudent exists in target distro, otherwise run as default/root
+$hasEamtaUser = $false
+$userCheck = wsl.exe -d $targetDistro -- bash -c "id -u eamtastudent" 2>$null
+if ($LASTEXITCODE -eq 0) {
+    $hasEamtaUser = $true
+}
+
+$wslArgs = @("-d", $targetDistro)
+if ($hasEamtaUser) {
+    $wslArgs += @("-u", "eamtastudent")
+}
+
+Write-Host "  Target distro: $targetDistro" -ForegroundColor DarkGray
+if ($hasEamtaUser) {
+    Write-Host "  Running as user: eamtastudent" -ForegroundColor DarkGray
+}
+Write-Host ""
+
+$wslArgs += @("--", "bash", "-c", $updateScript)
+& wsl.exe @wslArgs
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Update failed with exit code $LASTEXITCODE."
     exit $LASTEXITCODE
