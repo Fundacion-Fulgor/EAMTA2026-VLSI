@@ -18,7 +18,7 @@ irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/insta
 
 #### Updating an Existing Windows Setup (PowerShell)
 
-To update the container image, recreate the distrobox, and pull the latest repo changes on an existing installation, run in **PowerShell**:
+To update the container image, recreate the distrobox, and (when your local repo is on `main`) fast-forward to the latest course materials, run in **PowerShell**:
 
 ```powershell
 irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/update-wsl.ps1 | iex
