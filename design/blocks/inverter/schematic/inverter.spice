@@ -1,7 +1,0 @@
-* NGSPICE netlist for inverter - IHP SG13G2 PDK
-* Generated from inverter.sch
-
-.subckt inverter vdd in vss out
-XM1 out in vss vss sg13_lv_nmos w=1.0u l=0.13u ng=1 m=1
-XM2 out in vdd vdd sg13_lv_pmos w=2.0u l=0.13u ng=1 m=1
-.ends inverter

@@ -1,4 +1,4 @@
-# Student Workflow
+# Student Workflow (for advanced students)
 
 This document describes the workflow for student groups working on the 4-bit counter project.
 
@@ -32,13 +32,13 @@ git checkout -b group-<N>/<block-name>
 
 1. Create your block directory:
    ```bash
-   mkdir -p design/blocks/<block-name>/schematic
-   cd design/blocks/<block-name>/schematic
+   cd design
+   mkdir -p blocks/<block-name>/schematic
    ```
 
 2. Create schematic in xschem:
    ```bash
-   xschem <block-name>.sch
+   xschem blocks/<block-name>/<block-name>.sch
    ```
 
 3. Design guidelines:
@@ -52,9 +52,10 @@ git checkout -b group-<N>/<block-name>
 #### 3.2 Simulation (ngspice)
 
 1. Create a testbench:
+
    ```bash
-   mkdir -p verification/testbenches/<block-name>
-   cd verification/testbenches/<block-name>
+   cd design
+   xschem ../verification/testbenches/tb_<block-name>.sch
    ```
 
 2. Create testbench schematic in xschem:
@@ -62,49 +63,20 @@ git checkout -b group-<N>/<block-name>
    - Add stimulus sources
    - Add measurement probes
 
-3. Generate netlist from xschem
+3. Click Netlist and when it's green, simulate
 
-4. Run simulation:
-   ```bash
-   ngspice <block-name>_tb.spice
-   ```
-
-5. Verify functionality:
-   - Check logic operation
-   - Measure timing parameters
-   - Verify across corners (TT, FF, SS)
-
-6. Document results in a README.md in your testbench directory
-
-#### 3.3 Characterization (CACE)
-
-1. Create CACE configuration:
-   ```bash
-   mkdir -p design/blocks/<block-name>/char
-   cd design/blocks/<block-name>/char
-   ```
-
-2. Create CACE characterization file (<block-name>.yaml)
-
-3. Run characterization:
-   ```bash
-   cace <block-name>.yaml
-   ```
-
-4. Review results and ensure specifications are met
-
-#### 3.4 Layout (KLayout)
+#### 3.3 Layout (KLayout)
 
 1. Create layout directory:
    ```bash
    mkdir -p design/blocks/<block-name>/layout
-   cd design/blocks/<block-name>/layout
    ```
 
 2. Create layout in KLayout:
    ```bash
-   klayout -e -nn $PDK_ROOT/sg13g2/libs.tech/klayout/tech/sg13g2.lyt
+   klayout -e 
    ```
+   Save it in design/blocks/<block-name>/layout.
 
 3. Layout guidelines:
    - Follow DRC rules
@@ -275,3 +247,4 @@ Before submitting your PR, ensure:
 - [ngspice Examples](http://ngspice.sourceforge.net/docs.html)
 - [KLayout User Manual](https://www.klayout.de/doc-qt5/index.html)
 - [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
+- [IHP PDK Layout rules](https://ihp-open-pdk-docs.readthedocs.io/en/latest/layout_rules/01_general.html)
