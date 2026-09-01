@@ -6,7 +6,7 @@
     the distro. On first boot, cloud-init configures the user, packages, and
     kicks off the full environment setup automatically.
 .EXAMPLE
-    irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/develop/install-wsl.ps1 | iex
+    irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/install-wsl.ps1 | iex
 #>
 
 $ErrorActionPreference = "Stop"
@@ -43,7 +43,7 @@ packages:
   - curl
 
 runcmd:
-  - su - eamtastudent -c 'curl -sSL https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/develop/setup.sh -o /tmp/setup.sh && chmod +x /tmp/setup.sh && /tmp/setup.sh'
+  - su - eamtastudent -c 'curl -sSL https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/setup.sh -o /tmp/setup.sh && chmod +x /tmp/setup.sh && /tmp/setup.sh'
 "@
 
 # Write with UTF-8 (no BOM) and LF line endings
