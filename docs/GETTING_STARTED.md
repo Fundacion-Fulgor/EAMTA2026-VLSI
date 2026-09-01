@@ -11,10 +11,18 @@ This guide will help you set up the development environment for the 4-bit counte
 Open **PowerShell** and paste this single command — it installs WSL + Ubuntu and sets up the entire design environment automatically:
 
 ```powershell
-irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/develop/install-wsl.ps1 | iex
+irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/install-wsl.ps1 | iex
 ```
 
 > **Note:** The first boot may take ~20 minutes while the environment is configured. Once complete, opening "Ubuntu-24.04" from the Start Menu will drop you directly into the design environment.
+
+#### Updating an Existing Windows Setup (PowerShell)
+
+To update the container image, recreate the distrobox, and (when your local repo is on `main`) fast-forward to the latest course materials, run in **PowerShell**:
+
+```powershell
+irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/update-wsl.ps1 | iex
+```
 
 #### Linux (Terminal)
 
