@@ -49,7 +49,57 @@ fi
 echo -e "\e[1;32m[3/3]\e[0m Done! You can now start Ubuntu-24.04."
 '@
 
-wsl.exe -d Ubuntu-24.04 -u eamtastudent -- bash -c "$updateScript"
+# ── Distro and User Detection ────────────────────────────────────────────────
+# 1. Discover all installed WSL distributions
+$distroListRaw = wsl.exe -l -q 2>$null
+$distros = @($distroListRaw -split "\r?\n" | ForEach-Object { $_.Trim().Replace("`0", "") } | Where-Object { $_ -ne "" })
+
+if ($distros.Count -eq 0) {
+    Write-Error "No WSL distributions found. Please install the environment first using install-wsl.ps1."
+    exit 1
+}
+
+# 2. Find the specific distribution containing the EAMTA environment
+#    Verification criteria: user 'eamtastudent' exists OR '~/.osic_setup_done' / repo exists
+$targetDistro = $null
+$targetUser = $null
+
+foreach ($d in $distros) {
+    # Check 1: eamtastudent user with setup flag or repo
+    $checkStudent = wsl.exe -d $d -u eamtastudent -- bash -c "[ -f ~/.osic_setup_done ] || [ -d ~/EAMTA2026-VLSI ]" 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $targetDistro = $d
+        $targetUser = "eamtastudent"
+        break
+    }
+
+    # Check 2: default user with setup flag or repo
+    $checkDefault = wsl.exe -d $d -- bash -c "[ -f ~/.osic_setup_done ] || [ -d ~/EAMTA2026-VLSI ]" 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $targetDistro = $d
+        $targetUser = $null
+        break
+    }
+}
+
+if (-not $targetDistro) {
+    Write-Error "Could not find a WSL distribution with the EAMTA VLSI environment installed.`nChecked distros: $($distros -join ', ')`nRun install-wsl.ps1 to install it."
+    exit 1
+}
+
+$wslArgs = @("-d", $targetDistro)
+if ($targetUser) {
+    $wslArgs += @("-u", $targetUser)
+}
+
+Write-Host "  Found EAMTA environment in distro: $targetDistro" -ForegroundColor DarkGray
+if ($targetUser) {
+    Write-Host "  Running as user: $targetUser" -ForegroundColor DarkGray
+}
+Write-Host ""
+
+$wslArgs += @("--", "bash", "-c", $updateScript)
+& wsl.exe @wslArgs
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Update failed with exit code $LASTEXITCODE."
     exit $LASTEXITCODE
