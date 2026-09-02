@@ -16,14 +16,6 @@ irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/insta
 
 > **Note:** The first boot may take ~20 minutes while the environment is configured. Once complete, opening "Ubuntu-24.04" from the Start Menu will drop you directly into the design environment.
 
-#### Updating an Existing Windows Setup (PowerShell)
-
-To update the container image, recreate the distrobox, and (when your local repo is on `main`) fast-forward to the latest course materials, run in **PowerShell**:
-
-```powershell
-irm https://raw.githubusercontent.com/Fundacion-Fulgor/EAMTA2026-VLSI/main/update-wsl.ps1 | iex
-```
-
 #### Linux (Terminal)
 
 If you are already on a Linux system, open your terminal and run:

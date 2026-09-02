@@ -9,6 +9,13 @@ See [docs/STUDENT_WORKFLOW.md](docs/STUDENT_WORKFLOW.md) for the development wor
 
 See [docs/DESIGN_SPECIFICATIONS.md](docs/DESIGN_SPECIFICATIONS.md) for detailed design specifications.
 
+### Updating the Windows Tool Container
+
+Run the following command in PowerShell:
+
+```powershell
+wsl -d Ubuntu -- bash -lc 'podman pull docker.io/hpretl/iic-osic-tools:latest && distrobox stop iic-osic-tools2 || true; distrobox rm -f iic-osic-tools2 && distrobox create -n iic-osic-tools2 -i docker.io/hpretl/iic-osic-tools:latest --yes'
+```
 
 ## Course Project: 4-bit Counter Design
 
