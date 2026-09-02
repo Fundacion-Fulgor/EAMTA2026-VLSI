@@ -46,70 +46,66 @@ else
     echo "Info: $HOME/EAMTA2026-VLSI directory not found, skipping repository update."
 fi
 
-echo -e "\e[1;32m[3/3]\e[0m Done! You can now start Ubuntu-24.04."
+echo -e "\e[1;32m[3/3]\e[0m Done! You can now start your EAMTA WSL distribution."
 '@
 
-# ── Distro and User Detection ────────────────────────────────────────────────
-# 1. Discover all installed WSL distributions
 $distroListRaw = wsl.exe -l -q 2>$null
-$distros = @($distroListRaw -split "\r?\n" | ForEach-Object { $_.Trim().Replace("`0", "") } | Where-Object { $_ -ne "" })
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Could not list WSL distributions."
+    exit $LASTEXITCODE
+}
 
+$distros = @($distroListRaw -split "\r?\n" | ForEach-Object { $_.Trim().Replace("`0", "") } | Where-Object { $_ -ne "" })
 if ($distros.Count -eq 0) {
     Write-Error "No WSL distributions found. Please install the environment first using install-wsl.ps1."
     exit 1
 }
 
-# 2. Find the specific distribution containing the EAMTA environment
-#    Verification criteria: user 'eamtastudent' exists OR '~/.osic_setup_done' / repo exists
-$targetDistro = $null
-$targetUser = $null
+$candidates = @()
 
 foreach ($d in $distros) {
-    # Check if distro has eamtastudent user or default user with EAMTA setup
-    $detectScript = @'
-if id -u eamtastudent &>/dev/null; then
-    if su - eamtastudent -c '[ -f ~/.osic_setup_done ] || [ -d ~/EAMTA2026-VLSI ]' 2>/dev/null; then
-        echo "eamtastudent"
-        exit 0
-    fi
-fi
-if [ -f "$HOME/.osic_setup_done" ] || [ -d "$HOME/EAMTA2026-VLSI" ]; then
-    echo "default"
-    exit 0
-fi
-exit 1
-'@
+    $passwdEntries = @(& wsl.exe -d $d -u root -- getent passwd 2>$null)
+    if ($LASTEXITCODE -ne 0) {
+        continue
+    }
 
-    $detected = & cmd.exe /c "wsl.exe -d $d -- bash -c `"$detectScript`"" 2>$null
-    if ($LASTEXITCODE -eq 0 -and $detected) {
-        $targetDistro = $d
-        $userType = ($detected -split "\r?\n")[0].Trim()
-        if ($userType -eq "eamtastudent") {
-            $targetUser = "eamtastudent"
-        } else {
-            $targetUser = $null
+    foreach ($entry in $passwdEntries) {
+        $fields = $entry -split ":"
+        $uid = 0
+        if ($fields.Count -lt 7 -or -not [int]::TryParse($fields[2], [ref]$uid) -or $uid -lt 1000) {
+            continue
         }
-        break
+
+        $user = $fields[0]
+        $marker = "$($fields[5])/.osic_setup_done"
+        & wsl.exe -d $d -u root -- test -f $marker 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            $candidates += [PSCustomObject]@{
+                Distro = $d
+                User = $user
+            }
+        }
     }
 }
 
-if (-not $targetDistro) {
-    Write-Error "Could not find a WSL distribution with the EAMTA VLSI environment installed.`nChecked distros: $($distros -join ', ')`nRun install-wsl.ps1 to install it."
+if ($candidates.Count -eq 0) {
+    Write-Error "Could not find an EAMTA-managed WSL distribution.`nChecked distros: $($distros -join ', ')"
     exit 1
 }
 
-$wslArgs = @("-d", $targetDistro)
-if ($targetUser) {
-    $wslArgs += @("-u", $targetUser)
+if ($candidates.Count -gt 1) {
+    $candidateNames = $candidates | ForEach-Object { "$($_.Distro) ($($_.User))" }
+    Write-Error "Multiple EAMTA-managed WSL distributions found: $($candidateNames -join ', '). Remove the obsolete installation before updating."
+    exit 1
 }
 
+$targetDistro = $candidates[0].Distro
+$targetUser = $candidates[0].User
 Write-Host "  Found EAMTA environment in distro: $targetDistro" -ForegroundColor DarkGray
-if ($targetUser) {
-    Write-Host "  Running as user: $targetUser" -ForegroundColor DarkGray
-}
+Write-Host "  Running as user: $targetUser" -ForegroundColor DarkGray
 Write-Host ""
 
-$wslArgs += @("--", "bash", "-c", $updateScript)
+$wslArgs = @("-d", $targetDistro, "-u", $targetUser, "--", "bash", "-c", $updateScript)
 & wsl.exe @wslArgs
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Update failed with exit code $LASTEXITCODE."
