@@ -65,19 +65,30 @@ $targetDistro = $null
 $targetUser = $null
 
 foreach ($d in $distros) {
-    # Check 1: eamtastudent user with setup flag or repo
-    $checkStudent = wsl.exe -d $d -u eamtastudent -- bash -c "[ -f ~/.osic_setup_done ] || [ -d ~/EAMTA2026-VLSI ]" 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        $targetDistro = $d
-        $targetUser = "eamtastudent"
-        break
-    }
+    # Check if distro has eamtastudent user or default user with EAMTA setup
+    $detectScript = @'
+if id -u eamtastudent &>/dev/null; then
+    if su - eamtastudent -c '[ -f ~/.osic_setup_done ] || [ -d ~/EAMTA2026-VLSI ]' 2>/dev/null; then
+        echo "eamtastudent"
+        exit 0
+    fi
+fi
+if [ -f "$HOME/.osic_setup_done" ] || [ -d "$HOME/EAMTA2026-VLSI" ]; then
+    echo "default"
+    exit 0
+fi
+exit 1
+'@
 
-    # Check 2: default user with setup flag or repo
-    $checkDefault = wsl.exe -d $d -- bash -c "[ -f ~/.osic_setup_done ] || [ -d ~/EAMTA2026-VLSI ]" 2>$null
-    if ($LASTEXITCODE -eq 0) {
+    $detected = & cmd.exe /c "wsl.exe -d $d -- bash -c `"$detectScript`"" 2>$null
+    if ($LASTEXITCODE -eq 0 -and $detected) {
         $targetDistro = $d
-        $targetUser = $null
+        $userType = ($detected -split "\r?\n")[0].Trim()
+        if ($userType -eq "eamtastudent") {
+            $targetUser = "eamtastudent"
+        } else {
+            $targetUser = $null
+        }
         break
     }
 }
